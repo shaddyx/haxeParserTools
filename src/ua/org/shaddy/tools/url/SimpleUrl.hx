@@ -7,9 +7,4 @@ import ua.org.shaddy.tools.url.SimpleUrlCurl;
 	class SimpleUrl{
 #end
 
-	override public function get(url:String):String{
-		return "";
-	}
-
-
 }

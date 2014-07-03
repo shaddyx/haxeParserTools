@@ -17,7 +17,7 @@ class CurlInterface {
 		for (i in arr) {
 			trace(i);
 		}
-		return untyped __call__("curl_setopt_array", ch, arr);
+		return untyped __call__("curl_setopt_array", ch, php.Lib.associativeArrayOfHash(arr));
 	}
 	
 	public static function exec(ch:Dynamic):Bool{

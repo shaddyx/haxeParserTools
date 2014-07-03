@@ -18,6 +18,7 @@ class SimpleUrlCurl {
 	}
 	
 	public function get(url:String):String{
+		preRequest();
 		return "";
 	}
 	

@@ -8,6 +8,7 @@ class ua_org_shaddy_tools_url_SimpleUrlCurl {
 		$this->options->set(2, 1);
 	}}
 	public function get($url) {
+		$this->preRequest();
 		return "";
 	}
 	public function preRequest() {
