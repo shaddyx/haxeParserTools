@@ -1,0 +1,23 @@
+-cp src
+
+# Uncomment the desirable target
+# JavaScript target
+# -js out/SimpleUrl.js
+
+# SWF 9 target
+# -swf9 out/SimpleUrl.swf
+
+# ActionScript3 target
+# -as3 out
+
+# Neko target
+# -neko out/SimpleUrl.n
+
+# PHP target
+-php out
+
+# C++ target
+# -cpp out
+
+# Uncomment and place your main class with package
+-main ua.org.shaddy.Tests
