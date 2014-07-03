@@ -11,6 +11,13 @@ class haxe_ds_IntMap implements IMap, IteratorAggregate{
 	public function iterator() {
 		return new _hx_array_iterator(array_values($this->h));
 	}
+	public function get($key) {
+		if(array_key_exists($key, $this->h)) {
+			return $this->h[$key];
+		} else {
+			return null;
+		}
+	}
 	public function set($key, $value) {
 		$this->h[$key] = $value;
 	}

@@ -1,4 +1,5 @@
 package ua.org.shaddy.tools.url;
+import haxe.ds.IntMap;
 
 class CurlInterface {
 	static function __init__(){
@@ -10,14 +11,16 @@ class CurlInterface {
 	}
 	
 	public static function setopt(ch:Dynamic, option:Int, value:Dynamic):Bool{
-		return untyped __call__("curl_setopt", ch, option, value);
+		return untyped __php__("curl_setopt_array($ch, $option, $value)");
+		//return untyped __call__("curl_setopt", ch, option, value);
 	}
 	
-	public static function setoptArray(ch:Dynamic, arr:Map<Int, Dynamic>):Bool{
+	public static function setoptArray(ch:Dynamic, arr:IntMap<Dynamic>){
 		for (i in arr) {
-			trace(i);
+			setopt(ch, i, arr.get(i));
 		}
-		return untyped __call__("curl_setopt_array", ch, php.Lib.associativeArrayOfHash(arr));
+		
+		//return untyped __call__("curl_setopt_array", ch, php.Lib.associativeArrayOfHash(arr));
 	}
 	
 	public static function exec(ch:Dynamic):Bool{

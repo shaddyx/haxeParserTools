@@ -6,15 +6,15 @@ class ua_org_shaddy_tools_url_CurlInterface {
 		return curl_init();
 	}
 	static function setopt($ch, $option, $value) {
-		return curl_setopt($ch, $option, $value);
+		return curl_setopt_array($ch, $option, $value);
 	}
 	static function setoptArray($ch, $arr) {
-		$__hx__it = call_user_func((ua_org_shaddy_tools_url_CurlInterface_0($arr, $ch, $i)));
+		if(null == $arr) throw new HException('null iterable');
+		$__hx__it = $arr->iterator();
 		while($__hx__it->hasNext()) {
 			$i = $__hx__it->next();
-			haxe_Log::trace($i, _hx_anonymous(array("fileName" => "CurlInterface.hx", "lineNumber" => 18, "className" => "ua.org.shaddy.tools.url.CurlInterface", "methodName" => "setoptArray")));
+			ua_org_shaddy_tools_url_CurlInterface::setopt($ch, $i, $arr->get($i));
 		}
-		return curl_setopt_array($ch, $arr);
 	}
 	static function exec($ch) {
 		return curl_exec($ch);
@@ -23,15 +23,4 @@ class ua_org_shaddy_tools_url_CurlInterface {
 		return curl_close($ch);
 	}
 	function __toString() { return 'ua.org.shaddy.tools.url.CurlInterface'; }
-}
-function ua_org_shaddy_tools_url_CurlInterface_0(&$arr, &$ch, &$i) {
-	{
-		$_e = $arr;
-		return array(new _hx_lambda(array(&$_e, &$arr, &$ch, &$i), "ua_org_shaddy_tools_url_CurlInterface_1"), 'execute');
-	}
-}
-function ua_org_shaddy_tools_url_CurlInterface_1(&$_e, &$arr, &$ch, &$i) {
-	{
-		return $_e->iterator();
-	}
 }
