@@ -7,5 +7,9 @@ class Tests {
 		var a = new SimpleUrl();
 		var data = a.get("http://yandex.ru");
 		trace("Request complete:" + a.header);
+		
+		/*var a:Dynamic = "test";
+		trace (Std.is(a,String));
+		trace(a);*/
 	}
 }

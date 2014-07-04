@@ -1,12 +1,20 @@
 package ua.org.shaddy.tools.url;
-import ua.org.shaddy.tools.url.CurlInterface;
 import haxe.ds.IntMap;
 
 #if php
 	import ua.org.shaddy.tools.url.CurlOptionsPhp;
 	import ua.org.shaddy.tools.url.CurlInfoPhp;
-	import php.Lib;
+	import ua.org.shaddy.tools.url.CurlInterfacePhp;
+	//import php.Lib;
 #end
+
+#if cpp
+	import ua.org.shaddy.tools.url.CurlOptionsCpp;
+	import ua.org.shaddy.tools.url.CurlInfoCpp;
+	import ua.org.shaddy.tools.url.CurlInterfaceCpp;
+	//import cpp.Lib;
+#end
+
 
 #if (php || cpp)
 
@@ -18,7 +26,9 @@ class SimpleUrlCurl {
 	
 	public function new(){
 		 options = new IntMap<Dynamic>();
-		 options.set(CurlOptions.RETURNTRANSFER, 1);
+		 #if php 
+		 	options.set(CurlOptions.RETURNTRANSFER, 1);
+		 #end
 		 options.set(CurlOptions.FOLLOWLOCATION, 1);
 		 options.set(CurlOptions.HEADER, 1);
 		 
@@ -26,6 +36,7 @@ class SimpleUrlCurl {
 	
 	private function preRequest(){
 		handle = CurlInterface.init();
+		trace ("Handle is:" + handle);
 		CurlInterface.setOptArray(handle, options);
 	}
 	
