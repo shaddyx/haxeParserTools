@@ -13,6 +13,7 @@ HX_DECLARE_CLASS5(ua,org,shaddy,tools,url,CurlInterface)
 	#include <curl/curl.h>
 	#include <limits.h>
 	#include <stdio.h>
+	#include <stdlib.h>
 	#include <string>
 
 namespace ua{
@@ -54,7 +55,7 @@ class HXCPP_CLASS_ATTRIBUTES  CurlInterface_obj : public hx::Object{
 		static Dynamic getInfo( ::haxe::Int64 ch,int option);
 		static Dynamic getInfo_dyn();
 
-		static Dynamic exec( ::haxe::Int64 ch);
+		static ::String exec( ::haxe::Int64 ch);
 		static Dynamic exec_dyn();
 
 		static bool close( ::haxe::Int64 ch);

@@ -2,11 +2,13 @@ package ua.org.shaddy.tools.url;
 import haxe.ds.IntMap;
 import haxe.Int64;
 import haxe.Int32;
+import ua.org.shaddy.tools.url.CurlOptionsCpp;
 
 @:headerCode("
 	#include <curl/curl.h>
 	#include <limits.h>
 	#include <stdio.h>
+	#include <stdlib.h>
 	#include <string>
 ")
 @:buildXml("
@@ -16,10 +18,34 @@ import haxe.Int32;
 </target>
 ")
 
+@:cppFileCode("
+	struct MemoryStruct {
+	  char *memory;
+	  size_t size;
+	  int error;
+	};
+	static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp) {
+		  size_t realsize = size * nmemb;
+		  struct MemoryStruct *mem = (struct MemoryStruct *)userp;
+		  size_t memSize = mem->size + realsize + 1;
+		  mem->memory = (char*) realloc(mem->memory, memSize);
+		  if(mem->memory == NULL) {
+		    /* out of memory! */
+		    mem->error = 1; 
+		    return 0;
+		  }
+		  memcpy(&(mem->memory[mem->size]), contents, realsize);
+		  mem->size += realsize;
+		  mem->memory[mem->size] = 0;
+		  return realsize;
+	}
+")
+
 class CurlInterface {
 	/*static function __init__(){
 		//		TODO: add initial code for other languages
 	}*/
+	
 	
 	public static function init():Int64{
 		untyped __cpp__("long handler = (long) curl_easy_init();");
@@ -59,12 +85,29 @@ class CurlInterface {
 		return "";//untyped __call__("curl_getinfo", ch, option);
 	}
 	
-	public static function exec(ch:Int64):Dynamic{
+	public static function exec(ch:Int64):String{
+		setOpt(ch, CurlOptions.NOPROGRESS, true);
+		
+	
 		var hi:Int = Int64.getHigh(ch);
 		var lo:Int = Int64.getLow(ch);
-		untyped __cpp__("long handler = ((long) hi << 32) | lo");
-		untyped __cpp__("curl_easy_perform((CURL*) handler)" );
-		return "";//untyped __call__("curl_exec", ch);
+		untyped __cpp__("
+			struct MemoryStruct chunk;
+			chunk.memory = (char *) malloc(1);  /* will be grown as needed by the realloc above */ 
+  			chunk.size = 0;    /* no data at this point */ 
+			long handler = ((long) hi << 32) | lo;
+			curl_easy_setopt((CURL*) handler, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
+			curl_easy_setopt((CURL*) handler, CURLOPT_WRITEDATA, (void *)&chunk);
+			curl_easy_perform((CURL*) handler);
+			if (chunk.memory){
+				//printf (\"%s\", chunk.memory);
+				String result = HX_CSTRING(chunk.memory, chunk.size);
+    	    	free(chunk.memory);
+    	    	return result;
+    	    }
+		");
+				
+		return "";
 	}
 	
 	public static function close(ch:Int64):Bool{

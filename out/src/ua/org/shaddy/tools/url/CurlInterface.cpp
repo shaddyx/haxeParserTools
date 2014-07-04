@@ -18,6 +18,31 @@
 #ifndef INCLUDED_ua_org_shaddy_tools_url_CurlInterface
 #include <ua/org/shaddy/tools/url/CurlInterface.h>
 #endif
+#ifndef INCLUDED_ua_org_shaddy_tools_url_CurlOptions
+#include <ua/org/shaddy/tools/url/CurlOptions.h>
+#endif
+
+	struct MemoryStruct {
+	  char *memory;
+	  size_t size;
+	  int error;
+	};
+	static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp) {
+		  size_t realsize = size * nmemb;
+		  struct MemoryStruct *mem = (struct MemoryStruct *)userp;
+		  size_t memSize = mem->size + realsize + 1;
+		  mem->memory = (char*) realloc(mem->memory, memSize);
+		  if(mem->memory == NULL) {
+		    /* out of memory! */
+		    mem->error = 1; 
+		    return 0;
+		  }
+		  memcpy(&(mem->memory[mem->size]), contents, realsize);
+		  mem->size += realsize;
+		  mem->memory[mem->size] = 0;
+		  return realsize;
+	}
+
 namespace ua{
 namespace org{
 namespace shaddy{
@@ -43,18 +68,18 @@ Dynamic CurlInterface_obj::__Create(hx::DynamicArray inArgs)
 	return result;}
 
 ::haxe::Int64 CurlInterface_obj::init( ){
-	HX_STACK_PUSH("CurlInterface::init","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",24);
-	HX_STACK_LINE(25)
+	HX_STACK_PUSH("CurlInterface::init","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",50);
+	HX_STACK_LINE(51)
 	long handler = (long) curl_easy_init();;
-	HX_STACK_LINE(26)
+	HX_STACK_LINE(52)
 	printf("Handler is: %d \n ",handler);
-	HX_STACK_LINE(28)
+	HX_STACK_LINE(54)
 	int hi = handler >> 32;		HX_STACK_VAR(hi,"hi");
-	HX_STACK_LINE(29)
+	HX_STACK_LINE(55)
 	int lo = handler & 0x00000000ffffffff;		HX_STACK_VAR(lo,"lo");
-	HX_STACK_LINE(30)
+	HX_STACK_LINE(56)
 	::haxe::Int64 res = ::haxe::Int64_obj::__new(hi,lo);		HX_STACK_VAR(res,"res");
-	HX_STACK_LINE(31)
+	HX_STACK_LINE(57)
 	return res;
 }
 
@@ -62,42 +87,42 @@ Dynamic CurlInterface_obj::__Create(hx::DynamicArray inArgs)
 STATIC_HX_DEFINE_DYNAMIC_FUNC0(CurlInterface_obj,init,return )
 
 bool CurlInterface_obj::setOpt( ::haxe::Int64 ch,int option,Dynamic value){
-	HX_STACK_PUSH("CurlInterface::setOpt","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",35);
+	HX_STACK_PUSH("CurlInterface::setOpt","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",61);
 	HX_STACK_ARG(ch,"ch");
 	HX_STACK_ARG(option,"option");
 	HX_STACK_ARG(value,"value");
-	HX_STACK_LINE(36)
+	HX_STACK_LINE(62)
 	int hi = ::haxe::Int64_obj::getHigh(ch);		HX_STACK_VAR(hi,"hi");
-	HX_STACK_LINE(37)
+	HX_STACK_LINE(63)
 	int lo = ::haxe::Int64_obj::getLow(ch);		HX_STACK_VAR(lo,"lo");
-	HX_STACK_LINE(38)
+	HX_STACK_LINE(64)
 	long handler = ((long) hi << 32) | lo;
-	HX_STACK_LINE(39)
+	HX_STACK_LINE(65)
 	printf("Handler is: %d \n ",handler);
-	HX_STACK_LINE(40)
+	HX_STACK_LINE(66)
 	if ((::Std_obj::is(value,hx::ClassOf< ::String >()))){
-		HX_STACK_LINE(41)
+		HX_STACK_LINE(67)
 		String strr = (String) value;
-		HX_STACK_LINE(42)
+		HX_STACK_LINE(68)
 		return curl_easy_setopt((CURL*) handler, (CURLoption) option, strr.c_str());
 	}
 	else{
-		HX_STACK_LINE(43)
+		HX_STACK_LINE(69)
 		if ((::Std_obj::is(value,hx::ClassOf< ::Int >()))){
-			HX_STACK_LINE(43)
+			HX_STACK_LINE(69)
 			return curl_easy_setopt((CURL*) handler, (CURLoption) option, (int) value);
 		}
 		else{
-			HX_STACK_LINE(45)
+			HX_STACK_LINE(71)
 			if ((::Std_obj::is(value,hx::ClassOf< ::Bool >()))){
-				HX_STACK_LINE(45)
+				HX_STACK_LINE(71)
 				return curl_easy_setopt((CURL*) handler, (CURLoption) option, (bool) value);
 			}
 		}
 	}
-	HX_STACK_LINE(49)
-	::haxe::Log_obj::trace((((HX_CSTRING("Unknown option type [") + option) + HX_CSTRING("]: ")) + ::Std_obj::string(value)),hx::SourceInfo(HX_CSTRING("CurlInterfaceCpp.hx"),49,HX_CSTRING("ua.org.shaddy.tools.url.CurlInterface"),HX_CSTRING("setOpt")));
-	HX_STACK_LINE(50)
+	HX_STACK_LINE(75)
+	::haxe::Log_obj::trace((((HX_CSTRING("Unknown option type [") + option) + HX_CSTRING("]: ")) + ::Std_obj::string(value)),hx::SourceInfo(HX_CSTRING("CurlInterfaceCpp.hx"),75,HX_CSTRING("ua.org.shaddy.tools.url.CurlInterface"),HX_CSTRING("setOpt")));
+	HX_STACK_LINE(76)
 	return false;
 }
 
@@ -106,10 +131,10 @@ STATIC_HX_DEFINE_DYNAMIC_FUNC3(CurlInterface_obj,setOpt,return )
 
 Void CurlInterface_obj::setOptArray( ::haxe::Int64 ch,::haxe::ds::IntMap arr){
 {
-		HX_STACK_PUSH("CurlInterface::setOptArray","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",52);
+		HX_STACK_PUSH("CurlInterface::setOptArray","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",78);
 		HX_STACK_ARG(ch,"ch");
 		HX_STACK_ARG(arr,"arr");
-		HX_STACK_LINE(52)
+		HX_STACK_LINE(78)
 		for(::cpp::FastIterator_obj< int > *__it = ::cpp::CreateFastIterator< int >(arr->keys());  __it->hasNext(); ){
 			int i = __it->next();
 			::ua::org::shaddy::tools::url::CurlInterface_obj::setOpt(ch,i,arr->get(i));
@@ -122,28 +147,42 @@ return null();
 STATIC_HX_DEFINE_DYNAMIC_FUNC2(CurlInterface_obj,setOptArray,(void))
 
 Dynamic CurlInterface_obj::getInfo( ::haxe::Int64 ch,int option){
-	HX_STACK_PUSH("CurlInterface::getInfo","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",58);
+	HX_STACK_PUSH("CurlInterface::getInfo","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",84);
 	HX_STACK_ARG(ch,"ch");
 	HX_STACK_ARG(option,"option");
-	HX_STACK_LINE(58)
+	HX_STACK_LINE(84)
 	return HX_CSTRING("");
 }
 
 
 STATIC_HX_DEFINE_DYNAMIC_FUNC2(CurlInterface_obj,getInfo,return )
 
-Dynamic CurlInterface_obj::exec( ::haxe::Int64 ch){
-	HX_STACK_PUSH("CurlInterface::exec","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",62);
+::String CurlInterface_obj::exec( ::haxe::Int64 ch){
+	HX_STACK_PUSH("CurlInterface::exec","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",88);
 	HX_STACK_ARG(ch,"ch");
-	HX_STACK_LINE(63)
+	HX_STACK_LINE(89)
+	::ua::org::shaddy::tools::url::CurlInterface_obj::setOpt(ch,::ua::org::shaddy::tools::url::CurlOptions_obj::NOPROGRESS,true);
+	HX_STACK_LINE(92)
 	int hi = ::haxe::Int64_obj::getHigh(ch);		HX_STACK_VAR(hi,"hi");
-	HX_STACK_LINE(64)
+	HX_STACK_LINE(93)
 	int lo = ::haxe::Int64_obj::getLow(ch);		HX_STACK_VAR(lo,"lo");
-	HX_STACK_LINE(65)
-	long handler = ((long) hi << 32) | lo;
-	HX_STACK_LINE(66)
-	curl_easy_perform((CURL*) handler);
-	HX_STACK_LINE(67)
+	HX_STACK_LINE(94)
+	
+			struct MemoryStruct chunk;
+			chunk.memory = (char *) malloc(1);  /* will be grown as needed by the realloc above */ 
+  			chunk.size = 0;    /* no data at this point */ 
+			long handler = ((long) hi << 32) | lo;
+			curl_easy_setopt((CURL*) handler, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
+			curl_easy_setopt((CURL*) handler, CURLOPT_WRITEDATA, (void *)&chunk);
+			curl_easy_perform((CURL*) handler);
+			if (chunk.memory){
+				//printf ("%s", chunk.memory);
+				String result = HX_CSTRING(chunk.memory, chunk.size);
+    	    	free(chunk.memory);
+    	    	return result;
+    	    }
+		;
+	HX_STACK_LINE(110)
 	return HX_CSTRING("");
 }
 
@@ -151,17 +190,17 @@ Dynamic CurlInterface_obj::exec( ::haxe::Int64 ch){
 STATIC_HX_DEFINE_DYNAMIC_FUNC1(CurlInterface_obj,exec,return )
 
 bool CurlInterface_obj::close( ::haxe::Int64 ch){
-	HX_STACK_PUSH("CurlInterface::close","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",70);
+	HX_STACK_PUSH("CurlInterface::close","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",113);
 	HX_STACK_ARG(ch,"ch");
-	HX_STACK_LINE(71)
+	HX_STACK_LINE(114)
 	int hi = ::haxe::Int64_obj::getHigh(ch);		HX_STACK_VAR(hi,"hi");
-	HX_STACK_LINE(72)
+	HX_STACK_LINE(115)
 	int lo = ::haxe::Int64_obj::getLow(ch);		HX_STACK_VAR(lo,"lo");
-	HX_STACK_LINE(73)
+	HX_STACK_LINE(116)
 	long handler = ((long) hi << 32) | lo;
-	HX_STACK_LINE(74)
+	HX_STACK_LINE(117)
 	curl_easy_cleanup((CURL*) handler);
-	HX_STACK_LINE(75)
+	HX_STACK_LINE(118)
 	return true;
 }
 
