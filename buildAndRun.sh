@@ -1,7 +1,9 @@
 #!/bin/sh
 haxe build.hxml
 res=$?
-echo "state is: $res"
+
+red='\e[0;31m'
+NC='\e[0m' # No Color
 if [ $res -eq 0 ]
 then
 
@@ -12,4 +14,6 @@ then
 	echo "running..."
 	php $FILE
     fi
+else
+    echo -e "${red}Compilation error${NC}"
 fi

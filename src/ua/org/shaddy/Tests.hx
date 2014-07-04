@@ -1,10 +1,16 @@
 package ua.org.shaddy;
 import ua.org.shaddy.tools.url.SimpleUrl;
+import haxe.ds.IntMap;
 
 class Tests {
 	public static function main(){
-		trace("oook");
+		
 		var a = new SimpleUrl();
-		a.get("http://yandex.ru");
+		var data = a.get("http://yandex.ru");
+		trace("Request complete:");
+		
+		
+		
+		
 	}
 }

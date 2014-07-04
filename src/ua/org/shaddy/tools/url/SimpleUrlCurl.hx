@@ -1,27 +1,44 @@
 package ua.org.shaddy.tools.url;
 import ua.org.shaddy.tools.url.CurlInterface;
 import haxe.ds.IntMap;
+import ua.org.shaddy.tools.url.CurlOptions;
+import ua.org.shaddy.tools.url.CurlInfo;
 
-#if php
+#if (php || cpp)
 import php.Lib;
 
 class SimpleUrlCurl {
 	private var handle:Dynamic;
 	private var options:IntMap<Dynamic>;
+	public var header:String;
+	
 	public function new(){
 		 options = new IntMap<Dynamic>();
-		 options.set(1,"test");
-		 options.set(2,1);
+		 options.set(CurlOptions.RETURNTRANSFER, 1);
+		 options.set(CurlOptions.FOLLOWLOCATION, 1);
+		 options.set(CurlOptions.HEADER, 1);
+		 
 	}
 	
 	private function preRequest(){
 		handle = CurlInterface.init();
-		CurlInterface.setoptArray(handle, options);
+		CurlInterface.setOptArray(handle, options);
+	}
+	
+	private function makeRequest():String{
+		var data:String = CurlInterface.exec(handle);
+		var headerSize:Int = CurlInterface.getInfo(handle, CurlInfo.HEADER_SIZE);
+		header = data.substring(0, headerSize -1);
+		data = data.substring(headerSize);
+		trace("Header size is:" + headerSize);
+		CurlInterface.close(handle);
+		return data;
 	}
 	
 	public function get(url:String):String{
 		preRequest();
-		return "";
+		CurlInterface.setOpt(handle, CurlOptions.URL, url);
+		return makeRequest();
 	}
 }
 #end
