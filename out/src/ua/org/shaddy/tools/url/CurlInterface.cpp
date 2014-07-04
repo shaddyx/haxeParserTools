@@ -9,6 +9,9 @@
 #ifndef INCLUDED_haxe_Int64
 #include <haxe/Int64.h>
 #endif
+#ifndef INCLUDED_haxe_Log
+#include <haxe/Log.h>
+#endif
 #ifndef INCLUDED_haxe_ds_IntMap
 #include <haxe/ds/IntMap.h>
 #endif
@@ -80,10 +83,22 @@ bool CurlInterface_obj::setOpt( ::haxe::Int64 ch,int option,Dynamic value){
 	}
 	else{
 		HX_STACK_LINE(43)
-		return curl_easy_setopt((CURL*) handler, (CURLoption) option, value);
+		if ((::Std_obj::is(value,hx::ClassOf< ::Int >()))){
+			HX_STACK_LINE(43)
+			return curl_easy_setopt((CURL*) handler, (CURLoption) option, (int) value);
+		}
+		else{
+			HX_STACK_LINE(45)
+			if ((::Std_obj::is(value,hx::ClassOf< ::Bool >()))){
+				HX_STACK_LINE(45)
+				return curl_easy_setopt((CURL*) handler, (CURLoption) option, (bool) value);
+			}
+		}
 	}
-	HX_STACK_LINE(47)
-	return true;
+	HX_STACK_LINE(49)
+	::haxe::Log_obj::trace((((HX_CSTRING("Unknown option type [") + option) + HX_CSTRING("]: ")) + ::Std_obj::string(value)),hx::SourceInfo(HX_CSTRING("CurlInterfaceCpp.hx"),49,HX_CSTRING("ua.org.shaddy.tools.url.CurlInterface"),HX_CSTRING("setOpt")));
+	HX_STACK_LINE(50)
+	return false;
 }
 
 
@@ -91,10 +106,10 @@ STATIC_HX_DEFINE_DYNAMIC_FUNC3(CurlInterface_obj,setOpt,return )
 
 Void CurlInterface_obj::setOptArray( ::haxe::Int64 ch,::haxe::ds::IntMap arr){
 {
-		HX_STACK_PUSH("CurlInterface::setOptArray","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",50);
+		HX_STACK_PUSH("CurlInterface::setOptArray","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",52);
 		HX_STACK_ARG(ch,"ch");
 		HX_STACK_ARG(arr,"arr");
-		HX_STACK_LINE(50)
+		HX_STACK_LINE(52)
 		for(::cpp::FastIterator_obj< int > *__it = ::cpp::CreateFastIterator< int >(arr->keys());  __it->hasNext(); ){
 			int i = __it->next();
 			::ua::org::shaddy::tools::url::CurlInterface_obj::setOpt(ch,i,arr->get(i));
@@ -107,10 +122,10 @@ return null();
 STATIC_HX_DEFINE_DYNAMIC_FUNC2(CurlInterface_obj,setOptArray,(void))
 
 Dynamic CurlInterface_obj::getInfo( ::haxe::Int64 ch,int option){
-	HX_STACK_PUSH("CurlInterface::getInfo","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",56);
+	HX_STACK_PUSH("CurlInterface::getInfo","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",58);
 	HX_STACK_ARG(ch,"ch");
 	HX_STACK_ARG(option,"option");
-	HX_STACK_LINE(56)
+	HX_STACK_LINE(58)
 	return HX_CSTRING("");
 }
 
@@ -118,17 +133,17 @@ Dynamic CurlInterface_obj::getInfo( ::haxe::Int64 ch,int option){
 STATIC_HX_DEFINE_DYNAMIC_FUNC2(CurlInterface_obj,getInfo,return )
 
 Dynamic CurlInterface_obj::exec( ::haxe::Int64 ch){
-	HX_STACK_PUSH("CurlInterface::exec","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",60);
+	HX_STACK_PUSH("CurlInterface::exec","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",62);
 	HX_STACK_ARG(ch,"ch");
-	HX_STACK_LINE(61)
-	int hi = ::haxe::Int64_obj::getHigh(ch);		HX_STACK_VAR(hi,"hi");
-	HX_STACK_LINE(62)
-	int lo = ::haxe::Int64_obj::getLow(ch);		HX_STACK_VAR(lo,"lo");
 	HX_STACK_LINE(63)
-	long handler = ((long) hi << 32) | lo;
+	int hi = ::haxe::Int64_obj::getHigh(ch);		HX_STACK_VAR(hi,"hi");
 	HX_STACK_LINE(64)
-	curl_easy_perform((CURL*) handler);
+	int lo = ::haxe::Int64_obj::getLow(ch);		HX_STACK_VAR(lo,"lo");
 	HX_STACK_LINE(65)
+	long handler = ((long) hi << 32) | lo;
+	HX_STACK_LINE(66)
+	curl_easy_perform((CURL*) handler);
+	HX_STACK_LINE(67)
 	return HX_CSTRING("");
 }
 
@@ -136,17 +151,17 @@ Dynamic CurlInterface_obj::exec( ::haxe::Int64 ch){
 STATIC_HX_DEFINE_DYNAMIC_FUNC1(CurlInterface_obj,exec,return )
 
 bool CurlInterface_obj::close( ::haxe::Int64 ch){
-	HX_STACK_PUSH("CurlInterface::close","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",68);
+	HX_STACK_PUSH("CurlInterface::close","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",70);
 	HX_STACK_ARG(ch,"ch");
-	HX_STACK_LINE(69)
-	int hi = ::haxe::Int64_obj::getHigh(ch);		HX_STACK_VAR(hi,"hi");
-	HX_STACK_LINE(70)
-	int lo = ::haxe::Int64_obj::getLow(ch);		HX_STACK_VAR(lo,"lo");
 	HX_STACK_LINE(71)
-	long handler = ((long) hi << 32) | lo;
+	int hi = ::haxe::Int64_obj::getHigh(ch);		HX_STACK_VAR(hi,"hi");
 	HX_STACK_LINE(72)
-	curl_easy_cleanup((CURL*) handler);
+	int lo = ::haxe::Int64_obj::getLow(ch);		HX_STACK_VAR(lo,"lo");
 	HX_STACK_LINE(73)
+	long handler = ((long) hi << 32) | lo;
+	HX_STACK_LINE(74)
+	curl_easy_cleanup((CURL*) handler);
+	HX_STACK_LINE(75)
 	return true;
 }
 

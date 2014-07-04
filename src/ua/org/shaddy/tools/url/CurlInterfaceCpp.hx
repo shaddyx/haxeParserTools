@@ -37,16 +37,18 @@ class CurlInterface {
 		var lo:Int = Int64.getLow(ch);
 		untyped __cpp__("long handler = ((long) hi << 32) | lo");
 		untyped __cpp__("printf(\"Handler is: %d \\n \",handler)");
-		if (Std.is(value,String)){
+		if (Std.is(value, String)){
 			untyped __cpp__("String strr = (String) value");
 			return untyped __cpp__("curl_easy_setopt((CURL*) handler, (CURLoption) option, strr.c_str())" );
-		} else {
-			return untyped __cpp__("curl_easy_setopt((CURL*) handler, (CURLoption) option, value)" );
+		} else if (Std.is(value, Int)){
+			return untyped __cpp__("curl_easy_setopt((CURL*) handler, (CURLoption) option, (int) value)" );
+		} else if (Std.is(value, Bool)){
+			return untyped __cpp__("curl_easy_setopt((CURL*) handler, (CURLoption) option, (bool) value)" );
 		}
 		
-		return true;//untyped __call__("curl_setopt", ch, option, value); 
+		trace("Unknown option type [" + option + "]: " + value);
+		return false;
 	}
-	
 	public static function setOptArray(ch:Int64, arr:IntMap<Dynamic>){
 		for (i in arr.keys()) {
 			setOpt(ch, i, arr.get(i));

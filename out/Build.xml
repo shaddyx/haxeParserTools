@@ -23,6 +23,7 @@
    <depend name="include/IMap.h"/>
    <depend name="include/Std.h"/>
    <depend name="include/haxe/Int64.h"/>
+   <depend name="include/haxe/Log.h"/>
    <depend name="include/haxe/ds/IntMap.h"/>
    <depend name="include/ua/org/shaddy/tools/url/CurlInterface.h"/>
   </file>
