@@ -18,7 +18,6 @@ class ua_org_shaddy_tools_url_SimpleUrlCurl {
 		$headerSize = ua_org_shaddy_tools_url_CurlInterface::getInfo($this->handle, ua_org_shaddy_tools_url_CurlInfo::$HEADER_SIZE);
 		$this->header = _hx_substring($data, 0, $headerSize - 1);
 		$data = _hx_substring($data, $headerSize, null);
-		haxe_Log::trace("Header size is:" . _hx_string_rec($headerSize, ""), _hx_anonymous(array("fileName" => "SimpleUrlCurl.hx", "lineNumber" => 33, "className" => "ua.org.shaddy.tools.url.SimpleUrlCurl", "methodName" => "makeRequest")));
 		ua_org_shaddy_tools_url_CurlInterface::close($this->handle);
 		return $data;
 	}

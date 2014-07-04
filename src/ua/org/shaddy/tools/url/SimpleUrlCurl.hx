@@ -1,11 +1,15 @@
 package ua.org.shaddy.tools.url;
 import ua.org.shaddy.tools.url.CurlInterface;
 import haxe.ds.IntMap;
-import ua.org.shaddy.tools.url.CurlOptions;
-import ua.org.shaddy.tools.url.CurlInfo;
+
+#if php
+	import ua.org.shaddy.tools.url.CurlOptionsPhp;
+	import ua.org.shaddy.tools.url.CurlInfoPhp;
+	import php.Lib;
+#end
 
 #if (php || cpp)
-import php.Lib;
+
 
 class SimpleUrlCurl {
 	private var handle:Dynamic;
@@ -30,7 +34,7 @@ class SimpleUrlCurl {
 		var headerSize:Int = CurlInterface.getInfo(handle, CurlInfo.HEADER_SIZE);
 		header = data.substring(0, headerSize -1);
 		data = data.substring(headerSize);
-		trace("Header size is:" + headerSize);
+		//trace("Header size is:" + headerSize);
 		CurlInterface.close(handle);
 		return data;
 	}
