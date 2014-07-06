@@ -42,7 +42,7 @@ import haxe.io.Bytes;
 	}
 ")
 
-class CurlInterface {
+class CurlInterface{
 	/*static function __init__(){
 		//		TODO: add initial code for other languages
 	}*/
@@ -83,13 +83,20 @@ class CurlInterface {
 	}
 	
 	public static function getInfo(ch:Int64, option:Int):Dynamic{
-		return "";//untyped __call__("curl_getinfo", ch, option);
+		var hi:Int = Int64.getHigh(ch);
+		var lo:Int = Int64.getLow(ch);
+		var res:Int = 0;
+		untyped __cpp__("
+			long result = 0;
+			long handler = ((long) hi << 32) | lo;
+			curl_easy_getinfo((CURL*) handler, (CURLINFO) option, &result);
+			res = result;
+		");
+		return res;
 	}
 	
 	public static function exec(ch:Int64):String{
 		setOpt(ch, CurlOptions.NOPROGRESS, true);
-		
-	
 		var hi:Int = Int64.getHigh(ch);
 		var lo:Int = Int64.getLow(ch);
 		untyped __cpp__("
@@ -107,22 +114,11 @@ class CurlInterface {
 			var buf = new StringBuf();
 			for (i in 0...len){
 				var byte:Int = untyped __cpp__("chunk.memory[i]");
-				//trace("byte:" + byte);
 				buf.addChar(byte);
 			}
+			untyped __cpp__("free(chunk.memory);");
 			return buf.toString();
 		}
-		
-		untyped __cpp__("
-			if (chunk.memory){
-				//printf (\"%s\", chunk.memory);
-				//printf (\"Size is: %i \\n\", chunk.size);
-				//return String(chunk.memory, chunk.size);
-    	    	free(chunk.memory);
-    	    	
-    	    }
-		");
-				
 		return "";
 	}
 	

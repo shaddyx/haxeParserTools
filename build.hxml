@@ -22,4 +22,3 @@
 # Uncomment and place your main class with package
 -main ua.org.shaddy.Tests
 -D HXCPP_M64
--D -lcurl

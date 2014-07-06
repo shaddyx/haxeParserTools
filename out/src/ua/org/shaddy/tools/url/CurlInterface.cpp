@@ -149,23 +149,36 @@ Dynamic CurlInterface_obj::getInfo( ::haxe::Int64 ch,int option){
 	HX_STACK_PUSH("CurlInterface::getInfo","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",85);
 	HX_STACK_ARG(ch,"ch");
 	HX_STACK_ARG(option,"option");
-	HX_STACK_LINE(85)
-	return HX_CSTRING("");
+	HX_STACK_LINE(86)
+	int hi = ::haxe::Int64_obj::getHigh(ch);		HX_STACK_VAR(hi,"hi");
+	HX_STACK_LINE(87)
+	int lo = ::haxe::Int64_obj::getLow(ch);		HX_STACK_VAR(lo,"lo");
+	HX_STACK_LINE(88)
+	int res = (int)0;		HX_STACK_VAR(res,"res");
+	HX_STACK_LINE(89)
+	
+			long result = 0;
+			long handler = ((long) hi << 32) | lo;
+			curl_easy_getinfo((CURL*) handler, (CURLINFO) option, &result);
+			res = result;
+		;
+	HX_STACK_LINE(95)
+	return res;
 }
 
 
 STATIC_HX_DEFINE_DYNAMIC_FUNC2(CurlInterface_obj,getInfo,return )
 
 ::String CurlInterface_obj::exec( ::haxe::Int64 ch){
-	HX_STACK_PUSH("CurlInterface::exec","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",89);
+	HX_STACK_PUSH("CurlInterface::exec","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",98);
 	HX_STACK_ARG(ch,"ch");
-	HX_STACK_LINE(90)
+	HX_STACK_LINE(99)
 	::ua::org::shaddy::tools::url::CurlInterface_obj::setOpt(ch,::ua::org::shaddy::tools::url::CurlOptions_obj::NOPROGRESS,true);
-	HX_STACK_LINE(93)
+	HX_STACK_LINE(100)
 	int hi = ::haxe::Int64_obj::getHigh(ch);		HX_STACK_VAR(hi,"hi");
-	HX_STACK_LINE(94)
+	HX_STACK_LINE(101)
 	int lo = ::haxe::Int64_obj::getLow(ch);		HX_STACK_VAR(lo,"lo");
-	HX_STACK_LINE(95)
+	HX_STACK_LINE(102)
 	
 			struct MemoryStruct chunk;
 			chunk.memory = (char *) malloc(1);  /* will be grown as needed by the realloc above */ 
@@ -175,42 +188,34 @@ STATIC_HX_DEFINE_DYNAMIC_FUNC2(CurlInterface_obj,getInfo,return )
 			curl_easy_setopt((CURL*) handler, CURLOPT_WRITEDATA, (void *)&chunk);
 			curl_easy_perform((CURL*) handler);
 		;
-	HX_STACK_LINE(104)
+	HX_STACK_LINE(111)
 	bool success = chunk.memory;		HX_STACK_VAR(success,"success");
-	HX_STACK_LINE(105)
+	HX_STACK_LINE(112)
 	if ((success)){
-		HX_STACK_LINE(106)
+		HX_STACK_LINE(113)
 		int len = chunk.size;		HX_STACK_VAR(len,"len");
-		HX_STACK_LINE(107)
+		HX_STACK_LINE(114)
 		::StringBuf buf = ::StringBuf_obj::__new();		HX_STACK_VAR(buf,"buf");
-		HX_STACK_LINE(108)
+		HX_STACK_LINE(115)
 		{
-			HX_STACK_LINE(108)
+			HX_STACK_LINE(115)
 			int _g = (int)0;		HX_STACK_VAR(_g,"_g");
-			HX_STACK_LINE(108)
+			HX_STACK_LINE(115)
 			while(((_g < len))){
-				HX_STACK_LINE(108)
+				HX_STACK_LINE(115)
 				int i = (_g)++;		HX_STACK_VAR(i,"i");
-				HX_STACK_LINE(109)
+				HX_STACK_LINE(116)
 				int byte = chunk.memory[i];		HX_STACK_VAR(byte,"byte");
-				HX_STACK_LINE(111)
+				HX_STACK_LINE(117)
 				buf->b->push(::String::fromCharCode(byte));
 			}
 		}
-		HX_STACK_LINE(113)
+		HX_STACK_LINE(119)
+		free(chunk.memory);;
+		HX_STACK_LINE(120)
 		return buf->b->join(HX_CSTRING(""));
 	}
-	HX_STACK_LINE(116)
-	
-			if (chunk.memory){
-				//printf ("%s", chunk.memory);
-				//printf ("Size is: %i \n", chunk.size);
-				//return String(chunk.memory, chunk.size);
-    	    	free(chunk.memory);
-    	    	
-    	    }
-		;
-	HX_STACK_LINE(126)
+	HX_STACK_LINE(122)
 	return HX_CSTRING("");
 }
 
@@ -218,17 +223,17 @@ STATIC_HX_DEFINE_DYNAMIC_FUNC2(CurlInterface_obj,getInfo,return )
 STATIC_HX_DEFINE_DYNAMIC_FUNC1(CurlInterface_obj,exec,return )
 
 bool CurlInterface_obj::close( ::haxe::Int64 ch){
-	HX_STACK_PUSH("CurlInterface::close","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",129);
+	HX_STACK_PUSH("CurlInterface::close","ua/org/shaddy/tools/url/CurlInterfaceCpp.hx",125);
 	HX_STACK_ARG(ch,"ch");
-	HX_STACK_LINE(130)
+	HX_STACK_LINE(126)
 	int hi = ::haxe::Int64_obj::getHigh(ch);		HX_STACK_VAR(hi,"hi");
-	HX_STACK_LINE(131)
+	HX_STACK_LINE(127)
 	int lo = ::haxe::Int64_obj::getLow(ch);		HX_STACK_VAR(lo,"lo");
-	HX_STACK_LINE(132)
+	HX_STACK_LINE(128)
 	long handler = ((long) hi << 32) | lo;
-	HX_STACK_LINE(133)
+	HX_STACK_LINE(129)
 	curl_easy_cleanup((CURL*) handler);
-	HX_STACK_LINE(134)
+	HX_STACK_LINE(130)
 	return true;
 }
 

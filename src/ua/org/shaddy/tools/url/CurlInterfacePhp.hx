@@ -1,17 +1,14 @@
 package ua.org.shaddy.tools.url;
 import haxe.ds.IntMap;
 
-class CurlInterface {
-	/*static function __init__(){
-		//		TODO: add initial code for other languages
-	}*/
-	
+class CurlInterface{
+
 	public static function init():Dynamic{
 		return untyped __call__("curl_init");
 	}
 	
 	public static function setOpt(ch:Dynamic, option:Int, value:Dynamic):Bool{
-		trace ("Setting option [" + option + "]:" + value);
+		//trace ("Setting option [" + option + "]:" + value);
 		return untyped __call__("curl_setopt", ch, option, value); 
 	}
 	

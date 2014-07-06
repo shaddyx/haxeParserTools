@@ -1,5 +1,8 @@
-.*.cpp
-.*.o
-.*.gch
-.*.h
+syntax: glob
+*.cpp
+*.o
+*.gch
+*.h
+*.php
+*~
 
