@@ -22,6 +22,7 @@
   <file name="src/ua/org/shaddy/tools/url/CurlInterface.cpp">
    <depend name="include/IMap.h"/>
    <depend name="include/Std.h"/>
+   <depend name="include/StringBuf.h"/>
    <depend name="include/haxe/Int64.h"/>
    <depend name="include/haxe/Log.h"/>
    <depend name="include/haxe/ds/IntMap.h"/>
@@ -32,7 +33,10 @@
    <depend name="include/ua/org/shaddy/tools/url/CurlInfo.h"/>
   </file>
   <file name="src/ua/org/shaddy/Tests.cpp">
+   <depend name="include/haxe/Log.h"/>
    <depend name="include/ua/org/shaddy/Tests.h"/>
+   <depend name="include/ua/org/shaddy/tools/url/SimpleUrl.h"/>
+   <depend name="include/ua/org/shaddy/tools/url/SimpleUrlCurl.h"/>
   </file>
   <file name="src/haxe/ds/IntMap.cpp">
    <depend name="include/IMap.h"/>
@@ -44,6 +48,9 @@
   </file>
   <file name="src/haxe/Int64.cpp">
    <depend name="include/haxe/Int64.h"/>
+  </file>
+  <file name="src/StringBuf.cpp">
+   <depend name="include/StringBuf.h"/>
   </file>
   <file name="src/Std.cpp">
    <depend name="include/Std.h"/>

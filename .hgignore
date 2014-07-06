@@ -1,3 +1,5 @@
-#syntax glob
-out\/.*.cpp
-out\/.*.o
+.*.cpp
+.*.o
+.*.gch
+.*.h
+

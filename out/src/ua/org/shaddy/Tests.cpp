@@ -1,7 +1,16 @@
 #include <hxcpp.h>
 
+#ifndef INCLUDED_haxe_Log
+#include <haxe/Log.h>
+#endif
 #ifndef INCLUDED_ua_org_shaddy_Tests
 #include <ua/org/shaddy/Tests.h>
+#endif
+#ifndef INCLUDED_ua_org_shaddy_tools_url_SimpleUrl
+#include <ua/org/shaddy/tools/url/SimpleUrl.h>
+#endif
+#ifndef INCLUDED_ua_org_shaddy_tools_url_SimpleUrlCurl
+#include <ua/org/shaddy/tools/url/SimpleUrlCurl.h>
 #endif
 namespace ua{
 namespace org{
@@ -28,6 +37,12 @@ Dynamic Tests_obj::__Create(hx::DynamicArray inArgs)
 Void Tests_obj::main( ){
 {
 		HX_STACK_PUSH("Tests::main","ua/org/shaddy/Tests.hx",6);
+		HX_STACK_LINE(7)
+		::ua::org::shaddy::tools::url::SimpleUrl a = ::ua::org::shaddy::tools::url::SimpleUrl_obj::__new();		HX_STACK_VAR(a,"a");
+		HX_STACK_LINE(8)
+		::String data = a->get(HX_CSTRING("http://yandex.ru"));		HX_STACK_VAR(data,"data");
+		HX_STACK_LINE(9)
+		::haxe::Log_obj::trace((HX_CSTRING("Request complete:") + data),hx::SourceInfo(HX_CSTRING("Tests.hx"),9,HX_CSTRING("ua.org.shaddy.Tests"),HX_CSTRING("main")));
 	}
 return null();
 }

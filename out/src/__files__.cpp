@@ -4,6 +4,7 @@ namespace hx {
 const char *__hxcpp_all_files[] = {
 #ifdef HXCPP_DEBUGGER
 	"Std.hx",
+	"StringBuf.hx",
 	"haxe/Int64.hx",
 	"haxe/Log.hx",
 	"haxe/ds/IntMap.hx",

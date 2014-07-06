@@ -3,6 +3,7 @@ import haxe.ds.IntMap;
 import haxe.Int64;
 import haxe.Int32;
 import ua.org.shaddy.tools.url.CurlOptionsCpp;
+import haxe.io.Bytes;
 
 @:headerCode("
 	#include <curl/curl.h>
@@ -49,7 +50,7 @@ class CurlInterface {
 	
 	public static function init():Int64{
 		untyped __cpp__("long handler = (long) curl_easy_init();");
-		untyped __cpp__("printf(\"Handler is: %d \\n \",handler)");
+		//untyped __cpp__("printf(\"Handler is: %d \\n \",handler)");
 		
 		var hi:Int = untyped __cpp__("handler >> 32");
 		var lo:Int = untyped __cpp__("handler & 0x00000000ffffffff");
@@ -62,7 +63,7 @@ class CurlInterface {
 		var hi:Int = Int64.getHigh(ch);
 		var lo:Int = Int64.getLow(ch);
 		untyped __cpp__("long handler = ((long) hi << 32) | lo");
-		untyped __cpp__("printf(\"Handler is: %d \\n \",handler)");
+		//untyped __cpp__("printf(\"Handler is: %d \\n \",handler)");
 		if (Std.is(value, String)){
 			untyped __cpp__("String strr = (String) value");
 			return untyped __cpp__("curl_easy_setopt((CURL*) handler, (CURLoption) option, strr.c_str())" );
@@ -99,11 +100,26 @@ class CurlInterface {
 			curl_easy_setopt((CURL*) handler, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
 			curl_easy_setopt((CURL*) handler, CURLOPT_WRITEDATA, (void *)&chunk);
 			curl_easy_perform((CURL*) handler);
+		");
+		var success:Bool = untyped __cpp__("chunk.memory");
+		if (success){
+			var len:Int = untyped __cpp__("chunk.size");
+			var buf = new StringBuf();
+			for (i in 0...len){
+				var byte:Int = untyped __cpp__("chunk.memory[i]");
+				//trace("byte:" + byte);
+				buf.addChar(byte);
+			}
+			return buf.toString();
+		}
+		
+		untyped __cpp__("
 			if (chunk.memory){
 				//printf (\"%s\", chunk.memory);
-				String result = HX_CSTRING(chunk.memory, chunk.size);
+				//printf (\"Size is: %i \\n\", chunk.size);
+				//return String(chunk.memory, chunk.size);
     	    	free(chunk.memory);
-    	    	return result;
+    	    	
     	    }
 		");
 				

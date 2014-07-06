@@ -7,6 +7,7 @@ obj/linux64/278edc38_Tests.o
 obj/linux64/70cf633d_IntMap.o
 obj/linux64/aacdca39_Log.o
 obj/linux64/aacdca39_Int64.o
+obj/linux64/6e21df01_StringBuf.o
 obj/linux64/6e21df01_Std.o
 obj/linux64/6e21df01_IMap.o
 obj/linux64/6e21df01___boot__.o
