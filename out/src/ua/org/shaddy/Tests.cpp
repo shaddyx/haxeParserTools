@@ -1,7 +1,7 @@
 #include <hxcpp.h>
 
-#ifndef INCLUDED_sys_io_File
-#include <sys/io/File.h>
+#ifndef INCLUDED_haxe_Log
+#include <haxe/Log.h>
 #endif
 #ifndef INCLUDED_ua_org_shaddy_Tests
 #include <ua/org/shaddy/Tests.h>
@@ -41,8 +41,8 @@ Void Tests_obj::main( ){
 		::ua::org::shaddy::tools::url::SimpleUrl a = ::ua::org::shaddy::tools::url::SimpleUrl_obj::__new();		HX_STACK_VAR(a,"a");
 		HX_STACK_LINE(9)
 		::String data = a->get(HX_CSTRING("http://cs617819.vk.me/v617819601/13712/E2rV3iPJMCk.jpg"));		HX_STACK_VAR(data,"data");
-		HX_STACK_LINE(13)
-		::sys::io::File_obj::saveContent(HX_CSTRING("1.jpg"),data);
+		HX_STACK_LINE(12)
+		::haxe::Log_obj::trace((HX_CSTRING("Request complete:") + data.length),hx::SourceInfo(HX_CSTRING("Tests.hx"),12,HX_CSTRING("ua.org.shaddy.Tests"),HX_CSTRING("main")));
 	}
 return null();
 }

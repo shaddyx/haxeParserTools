@@ -4,16 +4,10 @@ obj/linux64/363fe475_CurlOptions.o
 obj/linux64/363fe475_CurlInterface.o
 obj/linux64/363fe475_CurlInfo.o
 obj/linux64/278edc38_Tests.o
-obj/linux64/fba15b25_FileOutput.o
-obj/linux64/fba15b25_File.o
-obj/linux64/55f727ce_Output.o
-obj/linux64/55f727ce_Error.o
 obj/linux64/55f727ce_Eof.o
-obj/linux64/55f727ce_Bytes.o
 obj/linux64/70cf633d_IntMap.o
 obj/linux64/aacdca39_Log.o
 obj/linux64/aacdca39_Int64.o
-obj/linux64/2eb2d361_Lib.o
 obj/linux64/6e21df01_StringBuf.o
 obj/linux64/6e21df01_Std.o
 obj/linux64/6e21df01_IMap.o

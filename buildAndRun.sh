@@ -1,19 +1,30 @@
 #!/bin/sh
-haxe build.hxml
-res=$?
+PHPFILE="out/index.php"
+CPPFILE="out/Tests"
+rm $PHPFILE;
+rm $CPPFILE;
+
+
+
+tryToRun(){
+    if [ -f $1 ]
+    then
+	echo "running... ($2 $1)"
+	$2 $1
+    fi
+}
 
 red='\e[0;31m'
 NC='\e[0m' # No Color
+haxe build.hxml
+res=$?
 if [ $res -eq 0 ]
 then
-
-    FILE="out/index.php"
-
-    if [ -f $FILE ]
-    then
-	echo "running..."
-	php $FILE
-    fi
+	tryToRun $PHPFILE "php"
+	tryToRun $CPPFILE
 else
     echo -e "${red}Compilation error${NC}"
 fi
+
+
+

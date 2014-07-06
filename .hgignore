@@ -1,8 +1,9 @@
 syntax: glob
-*.cpp
-*.o
-*.gch
-*.h
-*.php
+#*.cpp
+#*.o
+#*.gch
+#*.h
+#*.php
 *~
+out/*
 
