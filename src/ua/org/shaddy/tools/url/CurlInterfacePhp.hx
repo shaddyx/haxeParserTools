@@ -31,7 +31,8 @@ class CurlInterface{
 				}
 			}
 		");
-		return untyped __call__("curl_setopt", ch, CurlOptions.POSTFIELDS, fields); 
+		return setOpt(ch, CurlOptions.POSTFIELDS, fields);
+		//return untyped __call__("curl_setopt", ch, CurlOptions.POSTFIELDS, fields); 
 	}
 	
 	public static function getInfo(ch:Dynamic, option:Int):Dynamic{
