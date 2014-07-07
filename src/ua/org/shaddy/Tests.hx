@@ -19,7 +19,8 @@ class Tests {
 		//trace("Request complete:" + data);
 		//trace("error:" + a.lastResult.errorText);
 		//File.saveContent("1.jpg",data);
-		var a = new SimpleUrlProxy("socks5d://176.36.41.6:23");
+		var a = new SimpleUrlProxy("socks5://176.36.41.6:23");
+		trace (a);
 		
 		
 

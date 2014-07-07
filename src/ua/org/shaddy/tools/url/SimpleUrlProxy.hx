@@ -64,5 +64,7 @@ class SimpleUrlProxy {
 	                throw new Exception('Proxy chunks count is wrong ['.count($chunks).'] in:'. $str);*/
 	}
 	
-	
+	public function toString(){
+		return "proxy";
+	}
 }
