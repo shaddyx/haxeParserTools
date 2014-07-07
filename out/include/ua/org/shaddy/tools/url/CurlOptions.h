@@ -202,12 +202,6 @@ class HXCPP_CLASS_ATTRIBUTES  CurlOptions_obj : public hx::Object{
 		static int TRANSFER_ENCODING;
 		static int GSSAPI_DELEGATION;
 		static int ACCEPTTIMEOUT_MS;
-		static int DNS_SERVERS;
-		static int MAIL_AUTH;
-		static int SSL_OPTIONS;
-		static int TCP_KEEPALIVE;
-		static int TCP_KEEPIDLE;
-		static int TCP_KEEPINTVL;
 };
 
 } // end namespace ua

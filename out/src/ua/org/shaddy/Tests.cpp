@@ -67,10 +67,10 @@ Void Tests_obj::main( ){
 		::haxe::ds::StringMap fields = _Function_1_1::Block();		HX_STACK_VAR(fields,"fields");
 		HX_STACK_LINE(11)
 		::String data = a->post(HX_CSTRING("http://shaddy.org.ua/test.php"),fields);		HX_STACK_VAR(data,"data");
-		HX_STACK_LINE(15)
-		::haxe::Log_obj::trace((HX_CSTRING("Request complete:") + data),hx::SourceInfo(HX_CSTRING("Tests.hx"),15,HX_CSTRING("ua.org.shaddy.Tests"),HX_CSTRING("main")));
 		HX_STACK_LINE(16)
-		::haxe::Log_obj::trace((HX_CSTRING("error:") + a->lastResult->__Field(HX_CSTRING("errorText"),true)),hx::SourceInfo(HX_CSTRING("Tests.hx"),16,HX_CSTRING("ua.org.shaddy.Tests"),HX_CSTRING("main")));
+		::haxe::Log_obj::trace((HX_CSTRING("Request complete:") + data),hx::SourceInfo(HX_CSTRING("Tests.hx"),16,HX_CSTRING("ua.org.shaddy.Tests"),HX_CSTRING("main")));
+		HX_STACK_LINE(17)
+		::haxe::Log_obj::trace((HX_CSTRING("error:") + a->lastResult->__Field(HX_CSTRING("errorText"),true)),hx::SourceInfo(HX_CSTRING("Tests.hx"),17,HX_CSTRING("ua.org.shaddy.Tests"),HX_CSTRING("main")));
 	}
 return null();
 }

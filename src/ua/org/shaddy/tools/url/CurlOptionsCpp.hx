@@ -170,12 +170,12 @@ class CurlOptions {
 	public static var TRANSFER_ENCODING:Int;
 	public static var GSSAPI_DELEGATION:Int;
 	public static var ACCEPTTIMEOUT_MS:Int;
-	public static var DNS_SERVERS:Int;
-	public static var MAIL_AUTH:Int;
-	public static var SSL_OPTIONS:Int;
-	public static var TCP_KEEPALIVE:Int;
-	public static var TCP_KEEPIDLE:Int;
-	public static var TCP_KEEPINTVL:Int;
+	//public static var DNS_SERVERS:Int;
+	//public static var MAIL_AUTH:Int;
+	//public static var SSL_OPTIONS:Int;
+	//public static var TCP_KEEPALIVE:Int;
+	//public static var TCP_KEEPIDLE:Int;
+	//public static var TCP_KEEPINTVL:Int;
 	//public static var SAFE_UPLOAD:Int;
 	static function __init__(){
 		AUTOREFERER = untyped __cpp__ ("CURLOPT_AUTOREFERER");
@@ -345,13 +345,13 @@ class CurlOptions {
 		ACCEPT_ENCODING = untyped __cpp__ ("CURLOPT_ACCEPT_ENCODING");
 		TRANSFER_ENCODING = untyped __cpp__ ("CURLOPT_TRANSFER_ENCODING");
 		GSSAPI_DELEGATION = untyped __cpp__ ("CURLOPT_GSSAPI_DELEGATION");
-		ACCEPTTIMEOUT_MS = untyped __cpp__ ("CURLOPT_ACCEPTTIMEOUT_MS");
-		DNS_SERVERS = untyped __cpp__ ("CURLOPT_DNS_SERVERS");
-		MAIL_AUTH = untyped __cpp__ ("CURLOPT_MAIL_AUTH");
-		SSL_OPTIONS = untyped __cpp__ ("CURLOPT_SSL_OPTIONS");
-		TCP_KEEPALIVE = untyped __cpp__ ("CURLOPT_TCP_KEEPALIVE");
-		TCP_KEEPIDLE = untyped __cpp__ ("CURLOPT_TCP_KEEPIDLE");
-		TCP_KEEPINTVL = untyped __cpp__ ("CURLOPT_TCP_KEEPINTVL");
+		//ACCEPTTIMEOUT_MS = untyped __cpp__ ("CURLOPT_ACCEPTTIMEOUT_MS");
+		//DNS_SERVERS = untyped __cpp__ ("CURLOPT_DNS_SERVERS");
+		//MAIL_AUTH = untyped __cpp__ ("CURLOPT_MAIL_AUTH");
+		//SSL_OPTIONS = untyped __cpp__ ("CURLOPT_SSL_OPTIONS");
+		//TCP_KEEPALIVE = untyped __cpp__ ("CURLOPT_TCP_KEEPALIVE");
+		//TCP_KEEPIDLE = untyped __cpp__ ("CURLOPT_TCP_KEEPIDLE");
+		//TCP_KEEPINTVL = untyped __cpp__ ("CURLOPT_TCP_KEEPINTVL");
 		//SAFE_UPLOAD = untyped __cpp__ ("CURLOPT_SAFE_UPLOAD");
 	}
 }

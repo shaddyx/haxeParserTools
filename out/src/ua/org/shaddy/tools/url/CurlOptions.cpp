@@ -360,20 +360,6 @@ HX_STACK_PUSH("CurlOptions::__init__","ua/org/shaddy/tools/url/CurlOptionsCpp.hx
 	::ua::org::shaddy::tools::url::CurlOptions_obj::TRANSFER_ENCODING = CURLOPT_TRANSFER_ENCODING;
 	HX_STACK_LINE(347)
 	::ua::org::shaddy::tools::url::CurlOptions_obj::GSSAPI_DELEGATION = CURLOPT_GSSAPI_DELEGATION;
-	HX_STACK_LINE(348)
-	::ua::org::shaddy::tools::url::CurlOptions_obj::ACCEPTTIMEOUT_MS = CURLOPT_ACCEPTTIMEOUT_MS;
-	HX_STACK_LINE(349)
-	::ua::org::shaddy::tools::url::CurlOptions_obj::DNS_SERVERS = CURLOPT_DNS_SERVERS;
-	HX_STACK_LINE(350)
-	::ua::org::shaddy::tools::url::CurlOptions_obj::MAIL_AUTH = CURLOPT_MAIL_AUTH;
-	HX_STACK_LINE(351)
-	::ua::org::shaddy::tools::url::CurlOptions_obj::SSL_OPTIONS = CURLOPT_SSL_OPTIONS;
-	HX_STACK_LINE(352)
-	::ua::org::shaddy::tools::url::CurlOptions_obj::TCP_KEEPALIVE = CURLOPT_TCP_KEEPALIVE;
-	HX_STACK_LINE(353)
-	::ua::org::shaddy::tools::url::CurlOptions_obj::TCP_KEEPIDLE = CURLOPT_TCP_KEEPIDLE;
-	HX_STACK_LINE(354)
-	::ua::org::shaddy::tools::url::CurlOptions_obj::TCP_KEEPINTVL = CURLOPT_TCP_KEEPINTVL;
 }
 }
 
@@ -709,18 +695,6 @@ int CurlOptions_obj::GSSAPI_DELEGATION;
 
 int CurlOptions_obj::ACCEPTTIMEOUT_MS;
 
-int CurlOptions_obj::DNS_SERVERS;
-
-int CurlOptions_obj::MAIL_AUTH;
-
-int CurlOptions_obj::SSL_OPTIONS;
-
-int CurlOptions_obj::TCP_KEEPALIVE;
-
-int CurlOptions_obj::TCP_KEEPIDLE;
-
-int CurlOptions_obj::TCP_KEEPINTVL;
-
 
 CurlOptions_obj::CurlOptions_obj()
 {
@@ -816,7 +790,6 @@ Dynamic CurlOptions_obj::__Field(const ::String &inName,bool inCallProp)
 		if (HX_FIELD_EQ(inName,"PROTOCOLS") ) { return PROTOCOLS; }
 		if (HX_FIELD_EQ(inName,"MAIL_FROM") ) { return MAIL_FROM; }
 		if (HX_FIELD_EQ(inName,"MAIL_RCPT") ) { return MAIL_RCPT; }
-		if (HX_FIELD_EQ(inName,"MAIL_AUTH") ) { return MAIL_AUTH; }
 		break;
 	case 10:
 		if (HX_FIELD_EQ(inName,"BUFFERSIZE") ) { return BUFFERSIZE; }
@@ -848,8 +821,6 @@ Dynamic CurlOptions_obj::__Field(const ::String &inName,bool inCallProp)
 		if (HX_FIELD_EQ(inName,"TCP_NODELAY") ) { return TCP_NODELAY; }
 		if (HX_FIELD_EQ(inName,"FTP_SSL_CCC") ) { return FTP_SSL_CCC; }
 		if (HX_FIELD_EQ(inName,"DIRLISTONLY") ) { return DIRLISTONLY; }
-		if (HX_FIELD_EQ(inName,"DNS_SERVERS") ) { return DNS_SERVERS; }
-		if (HX_FIELD_EQ(inName,"SSL_OPTIONS") ) { return SSL_OPTIONS; }
 		break;
 	case 12:
 		if (HX_FIELD_EQ(inName,"FORBID_REUSE") ) { return FORBID_REUSE; }
@@ -865,7 +836,6 @@ Dynamic CurlOptions_obj::__Field(const ::String &inName,bool inCallProp)
 		if (HX_FIELD_EQ(inName,"FTP_USE_PRET") ) { return FTP_USE_PRET; }
 		if (HX_FIELD_EQ(inName,"RTSP_REQUEST") ) { return RTSP_REQUEST; }
 		if (HX_FIELD_EQ(inName,"TLSAUTH_TYPE") ) { return TLSAUTH_TYPE; }
-		if (HX_FIELD_EQ(inName,"TCP_KEEPIDLE") ) { return TCP_KEEPIDLE; }
 		break;
 	case 13:
 		if (HX_FIELD_EQ(inName,"COOKIESESSION") ) { return COOKIESESSION; }
@@ -879,8 +849,6 @@ Dynamic CurlOptions_obj::__Field(const ::String &inName,bool inCallProp)
 		if (HX_FIELD_EQ(inName,"PROXYPASSWORD") ) { return PROXYPASSWORD; }
 		if (HX_FIELD_EQ(inName,"PROXYUSERNAME") ) { return PROXYUSERNAME; }
 		if (HX_FIELD_EQ(inName,"WILDCARDMATCH") ) { return WILDCARDMATCH; }
-		if (HX_FIELD_EQ(inName,"TCP_KEEPALIVE") ) { return TCP_KEEPALIVE; }
-		if (HX_FIELD_EQ(inName,"TCP_KEEPINTVL") ) { return TCP_KEEPINTVL; }
 		break;
 	case 14:
 		if (HX_FIELD_EQ(inName,"CONNECTTIMEOUT") ) { return CONNECTTIMEOUT; }
@@ -1036,7 +1004,6 @@ Dynamic CurlOptions_obj::__SetField(const ::String &inName,const Dynamic &inValu
 		if (HX_FIELD_EQ(inName,"PROTOCOLS") ) { PROTOCOLS=inValue.Cast< int >(); return inValue; }
 		if (HX_FIELD_EQ(inName,"MAIL_FROM") ) { MAIL_FROM=inValue.Cast< int >(); return inValue; }
 		if (HX_FIELD_EQ(inName,"MAIL_RCPT") ) { MAIL_RCPT=inValue.Cast< int >(); return inValue; }
-		if (HX_FIELD_EQ(inName,"MAIL_AUTH") ) { MAIL_AUTH=inValue.Cast< int >(); return inValue; }
 		break;
 	case 10:
 		if (HX_FIELD_EQ(inName,"BUFFERSIZE") ) { BUFFERSIZE=inValue.Cast< int >(); return inValue; }
@@ -1068,8 +1035,6 @@ Dynamic CurlOptions_obj::__SetField(const ::String &inName,const Dynamic &inValu
 		if (HX_FIELD_EQ(inName,"TCP_NODELAY") ) { TCP_NODELAY=inValue.Cast< int >(); return inValue; }
 		if (HX_FIELD_EQ(inName,"FTP_SSL_CCC") ) { FTP_SSL_CCC=inValue.Cast< int >(); return inValue; }
 		if (HX_FIELD_EQ(inName,"DIRLISTONLY") ) { DIRLISTONLY=inValue.Cast< int >(); return inValue; }
-		if (HX_FIELD_EQ(inName,"DNS_SERVERS") ) { DNS_SERVERS=inValue.Cast< int >(); return inValue; }
-		if (HX_FIELD_EQ(inName,"SSL_OPTIONS") ) { SSL_OPTIONS=inValue.Cast< int >(); return inValue; }
 		break;
 	case 12:
 		if (HX_FIELD_EQ(inName,"FORBID_REUSE") ) { FORBID_REUSE=inValue.Cast< int >(); return inValue; }
@@ -1085,7 +1050,6 @@ Dynamic CurlOptions_obj::__SetField(const ::String &inName,const Dynamic &inValu
 		if (HX_FIELD_EQ(inName,"FTP_USE_PRET") ) { FTP_USE_PRET=inValue.Cast< int >(); return inValue; }
 		if (HX_FIELD_EQ(inName,"RTSP_REQUEST") ) { RTSP_REQUEST=inValue.Cast< int >(); return inValue; }
 		if (HX_FIELD_EQ(inName,"TLSAUTH_TYPE") ) { TLSAUTH_TYPE=inValue.Cast< int >(); return inValue; }
-		if (HX_FIELD_EQ(inName,"TCP_KEEPIDLE") ) { TCP_KEEPIDLE=inValue.Cast< int >(); return inValue; }
 		break;
 	case 13:
 		if (HX_FIELD_EQ(inName,"COOKIESESSION") ) { COOKIESESSION=inValue.Cast< int >(); return inValue; }
@@ -1099,8 +1063,6 @@ Dynamic CurlOptions_obj::__SetField(const ::String &inName,const Dynamic &inValu
 		if (HX_FIELD_EQ(inName,"PROXYPASSWORD") ) { PROXYPASSWORD=inValue.Cast< int >(); return inValue; }
 		if (HX_FIELD_EQ(inName,"PROXYUSERNAME") ) { PROXYUSERNAME=inValue.Cast< int >(); return inValue; }
 		if (HX_FIELD_EQ(inName,"WILDCARDMATCH") ) { WILDCARDMATCH=inValue.Cast< int >(); return inValue; }
-		if (HX_FIELD_EQ(inName,"TCP_KEEPALIVE") ) { TCP_KEEPALIVE=inValue.Cast< int >(); return inValue; }
-		if (HX_FIELD_EQ(inName,"TCP_KEEPINTVL") ) { TCP_KEEPINTVL=inValue.Cast< int >(); return inValue; }
 		break;
 	case 14:
 		if (HX_FIELD_EQ(inName,"CONNECTTIMEOUT") ) { CONNECTTIMEOUT=inValue.Cast< int >(); return inValue; }
@@ -1348,12 +1310,6 @@ static ::String sStaticFields[] = {
 	HX_CSTRING("TRANSFER_ENCODING"),
 	HX_CSTRING("GSSAPI_DELEGATION"),
 	HX_CSTRING("ACCEPTTIMEOUT_MS"),
-	HX_CSTRING("DNS_SERVERS"),
-	HX_CSTRING("MAIL_AUTH"),
-	HX_CSTRING("SSL_OPTIONS"),
-	HX_CSTRING("TCP_KEEPALIVE"),
-	HX_CSTRING("TCP_KEEPIDLE"),
-	HX_CSTRING("TCP_KEEPINTVL"),
 	String(null()) };
 
 static ::String sMemberFields[] = {
@@ -1527,12 +1483,6 @@ static void sMarkStatics(HX_MARK_PARAMS) {
 	HX_MARK_MEMBER_NAME(CurlOptions_obj::TRANSFER_ENCODING,"TRANSFER_ENCODING");
 	HX_MARK_MEMBER_NAME(CurlOptions_obj::GSSAPI_DELEGATION,"GSSAPI_DELEGATION");
 	HX_MARK_MEMBER_NAME(CurlOptions_obj::ACCEPTTIMEOUT_MS,"ACCEPTTIMEOUT_MS");
-	HX_MARK_MEMBER_NAME(CurlOptions_obj::DNS_SERVERS,"DNS_SERVERS");
-	HX_MARK_MEMBER_NAME(CurlOptions_obj::MAIL_AUTH,"MAIL_AUTH");
-	HX_MARK_MEMBER_NAME(CurlOptions_obj::SSL_OPTIONS,"SSL_OPTIONS");
-	HX_MARK_MEMBER_NAME(CurlOptions_obj::TCP_KEEPALIVE,"TCP_KEEPALIVE");
-	HX_MARK_MEMBER_NAME(CurlOptions_obj::TCP_KEEPIDLE,"TCP_KEEPIDLE");
-	HX_MARK_MEMBER_NAME(CurlOptions_obj::TCP_KEEPINTVL,"TCP_KEEPINTVL");
 };
 
 static void sVisitStatics(HX_VISIT_PARAMS) {
@@ -1703,12 +1653,6 @@ static void sVisitStatics(HX_VISIT_PARAMS) {
 	HX_VISIT_MEMBER_NAME(CurlOptions_obj::TRANSFER_ENCODING,"TRANSFER_ENCODING");
 	HX_VISIT_MEMBER_NAME(CurlOptions_obj::GSSAPI_DELEGATION,"GSSAPI_DELEGATION");
 	HX_VISIT_MEMBER_NAME(CurlOptions_obj::ACCEPTTIMEOUT_MS,"ACCEPTTIMEOUT_MS");
-	HX_VISIT_MEMBER_NAME(CurlOptions_obj::DNS_SERVERS,"DNS_SERVERS");
-	HX_VISIT_MEMBER_NAME(CurlOptions_obj::MAIL_AUTH,"MAIL_AUTH");
-	HX_VISIT_MEMBER_NAME(CurlOptions_obj::SSL_OPTIONS,"SSL_OPTIONS");
-	HX_VISIT_MEMBER_NAME(CurlOptions_obj::TCP_KEEPALIVE,"TCP_KEEPALIVE");
-	HX_VISIT_MEMBER_NAME(CurlOptions_obj::TCP_KEEPIDLE,"TCP_KEEPIDLE");
-	HX_VISIT_MEMBER_NAME(CurlOptions_obj::TCP_KEEPINTVL,"TCP_KEEPINTVL");
 };
 
 Class CurlOptions_obj::__mClass;

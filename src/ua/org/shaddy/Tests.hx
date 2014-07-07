@@ -9,6 +9,7 @@ class Tests {
 		var a = new SimpleUrl();
 		var fields = ["test" => "123412341234", 'map' => "t", "file" => "@@@build.hxml"];
 		var data = a.post("http://shaddy.org.ua/test.php", fields);
+		
 		//var data = a.get("http://cs617819.vk.me/v617819601/13712/E2rV3iPJMCk.jpg");
 		//var data = a.get("https://google.com");
 		//trace("Request data:" + data);
