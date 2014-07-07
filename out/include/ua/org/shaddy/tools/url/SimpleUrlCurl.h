@@ -7,6 +7,7 @@
 
 HX_DECLARE_CLASS0(IMap)
 HX_DECLARE_CLASS2(haxe,ds,IntMap)
+HX_DECLARE_CLASS2(haxe,ds,StringMap)
 HX_DECLARE_CLASS5(ua,org,shaddy,tools,url,SimpleUrlCurl)
 namespace ua{
 namespace org{
@@ -35,15 +36,19 @@ class HXCPP_CLASS_ATTRIBUTES  SimpleUrlCurl_obj : public hx::Object{
 		void __Visit(HX_VISIT_PARAMS);
 		::String __ToString() const { return HX_CSTRING("SimpleUrlCurl"); }
 
+		virtual ::String post( ::String url,::haxe::ds::StringMap postData);
+		Dynamic post_dyn();
+
 		virtual ::String get( ::String url);
 		Dynamic get_dyn();
 
 		virtual ::String makeRequest( );
 		Dynamic makeRequest_dyn();
 
-		virtual Void preRequest( );
+		virtual Void preRequest( ::String url);
 		Dynamic preRequest_dyn();
 
+		Dynamic lastResult;
 		::String header;
 		::haxe::ds::IntMap options;
 		Dynamic handle;

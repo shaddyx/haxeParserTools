@@ -1,8 +1,8 @@
 #!/bin/sh
 PHPFILE="out/index.php"
 CPPFILE="out/Tests"
-rm $PHPFILE;
-rm $CPPFILE;
+rm $PHPFILE 2>/dev/null
+rm $CPPFILE 2>/dev/null
 
 
 

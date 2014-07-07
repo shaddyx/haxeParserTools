@@ -5,6 +5,7 @@ obj/linux64/363fe475_CurlInterface.o
 obj/linux64/363fe475_CurlInfo.o
 obj/linux64/278edc38_Tests.o
 obj/linux64/55f727ce_Eof.o
+obj/linux64/70cf633d_StringMap.o
 obj/linux64/70cf633d_IntMap.o
 obj/linux64/aacdca39_Log.o
 obj/linux64/aacdca39_Int64.o

@@ -1,9 +1,13 @@
 package ua.org.shaddy.tools.url;
 import haxe.ds.IntMap;
+import haxe.ds.StringMap;
 import haxe.Int64;
 import haxe.Int32;
 import ua.org.shaddy.tools.url.CurlOptionsCpp;
+import ua.org.shaddy.tools.url.SimpleUrlCurl;
+
 import haxe.io.Bytes;
+
 
 @:headerCode("
 	#include <curl/curl.h>
@@ -14,7 +18,6 @@ import haxe.io.Bytes;
 ")
 @:buildXml("
 <target id='haxe'>
-  <!-- <lib name='${HXCPP}/lib/${BINDIR}/libsqlite${LIBEXTRA}${LIBEXT}'/> -->
   <lib name='-lcurl' />
 </target>
 ")
@@ -41,12 +44,10 @@ import haxe.io.Bytes;
 		  return realsize;
 	}
 ")
-
 class CurlInterface{
 	/*static function __init__(){
 		//		TODO: add initial code for other languages
 	}*/
-	
 	
 	public static function init():Int64{
 		untyped __cpp__("long handler = (long) curl_easy_init();");
@@ -95,10 +96,12 @@ class CurlInterface{
 		return res;
 	}
 	
-	public static function exec(ch:Int64):String{
+	public static function exec(ch:Int64):CurlResult{
 		setOpt(ch, CurlOptions.NOPROGRESS, true);
 		var hi:Int = Int64.getHigh(ch);
 		var lo:Int = Int64.getLow(ch);
+		var errCode:Int = 0;
+		var curlResult:CurlResult = {data:"",errorText:"",errorCode:0};
 		untyped __cpp__("
 			struct MemoryStruct chunk;
 			chunk.memory = (char *) malloc(1);  /* will be grown as needed by the realloc above */ 
@@ -106,10 +109,13 @@ class CurlInterface{
 			long handler = ((long) hi << 32) | lo;
 			curl_easy_setopt((CURL*) handler, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
 			curl_easy_setopt((CURL*) handler, CURLOPT_WRITEDATA, (void *)&chunk);
-			curl_easy_perform((CURL*) handler);
+			CURLcode res = curl_easy_perform((CURL*) handler);
+			if(res != CURLE_OK) {
+				errCode = res;
+			}
 		");
-		var success:Bool = untyped __cpp__("chunk.memory");
-		if (success){
+		curlResult.errorCode = errCode;
+		if (errCode == 0){
 			var len:Int = untyped __cpp__("chunk.size");
 			var buf = new StringBuf();
 			for (i in 0...len){
@@ -117,9 +123,22 @@ class CurlInterface{
 				buf.addChar(byte);
 			}
 			untyped __cpp__("free(chunk.memory);");
-			return buf.toString();
+			curlResult.data = buf.toString();
+		} else {
+			 
+			untyped __cpp__("
+				const char* c = curl_easy_strerror(res);
+			");
+			var len:Int = untyped __cpp__("strlen(c)");
+			var errorCode = untyped __cpp__("res");
+			var buf = new StringBuf();
+			for (i in 0...len){
+				var byte:Int = untyped __cpp__("c[i]");
+				buf.addChar(byte);
+			} 
+			curlResult.errorText = buf.toString();
 		}
-		return "";
+		return curlResult;
 	}
 	
 	public static function close(ch:Int64):Bool{
@@ -128,6 +147,34 @@ class CurlInterface{
 		untyped __cpp__("long handler = ((long) hi << 32) | lo");
 		untyped __cpp__("curl_easy_cleanup((CURL*) handler)" );
 		return true;
+	}
+	
+	
+	public static function setPostFields(ch:Dynamic, arr:StringMap<String>){
+		var hi:Int = Int64.getHigh(ch);
+		var lo:Int = Int64.getLow(ch);
+		untyped __cpp__("
+			long handler = ((long) hi << 32) | lo;
+			struct curl_httppost* post = NULL;
+			struct curl_httppost* last = NULL;
+		");
+
+		for (postName in arr.keys()) {
+			var value:String = arr.get(postName);
+			if (value.substr(0,3) != "@@@"){
+				untyped __cpp__("
+					curl_formadd(&post, &last, CURLFORM_COPYNAME, postName.c_str(), CURLFORM_COPYCONTENTS, value.c_str(), CURLFORM_END);
+				");
+			} else {
+				value = value.substr(3);
+				untyped __cpp__("
+					curl_formadd(&post, &last, CURLFORM_COPYNAME, postName.c_str(), CURLFORM_FILE, value.c_str(), CURLFORM_END);
+				");			
+			}
+		}
+		untyped __cpp__("
+			curl_easy_setopt((CURL*) handler, CURLOPT_HTTPPOST, post);
+		");
 	}
 	
 	//

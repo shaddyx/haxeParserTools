@@ -1,7 +1,13 @@
 #include <hxcpp.h>
 
+#ifndef INCLUDED_IMap
+#include <IMap.h>
+#endif
 #ifndef INCLUDED_haxe_Log
 #include <haxe/Log.h>
+#endif
+#ifndef INCLUDED_haxe_ds_StringMap
+#include <haxe/ds/StringMap.h>
 #endif
 #ifndef INCLUDED_ua_org_shaddy_Tests
 #include <ua/org/shaddy/Tests.h>
@@ -36,13 +42,35 @@ Dynamic Tests_obj::__Create(hx::DynamicArray inArgs)
 
 Void Tests_obj::main( ){
 {
-		HX_STACK_PUSH("Tests::main","ua/org/shaddy/Tests.hx",7);
-		HX_STACK_LINE(8)
-		::ua::org::shaddy::tools::url::SimpleUrl a = ::ua::org::shaddy::tools::url::SimpleUrl_obj::__new();		HX_STACK_VAR(a,"a");
+		HX_STACK_PUSH("Tests::main","ua/org/shaddy/Tests.hx",8);
 		HX_STACK_LINE(9)
-		::String data = a->get(HX_CSTRING("http://cs617819.vk.me/v617819601/13712/E2rV3iPJMCk.jpg"));		HX_STACK_VAR(data,"data");
-		HX_STACK_LINE(12)
-		::haxe::Log_obj::trace((HX_CSTRING("Request complete:") + data.length),hx::SourceInfo(HX_CSTRING("Tests.hx"),12,HX_CSTRING("ua.org.shaddy.Tests"),HX_CSTRING("main")));
+		::ua::org::shaddy::tools::url::SimpleUrl a = ::ua::org::shaddy::tools::url::SimpleUrl_obj::__new();		HX_STACK_VAR(a,"a");
+		struct _Function_1_1{
+			inline static ::haxe::ds::StringMap Block( ){
+				HX_STACK_PUSH("*::closure","ua/org/shaddy/Tests.hx",10);
+				{
+					HX_STACK_LINE(10)
+					::haxe::ds::StringMap _g = ::haxe::ds::StringMap_obj::__new();		HX_STACK_VAR(_g,"_g");
+					HX_STACK_LINE(10)
+					_g->set(HX_CSTRING("test"),HX_CSTRING("123412341234"));
+					HX_STACK_LINE(10)
+					_g->set(HX_CSTRING("map"),HX_CSTRING("t"));
+					HX_STACK_LINE(10)
+					_g->set(HX_CSTRING("file"),HX_CSTRING("@@@build.hxml"));
+					HX_STACK_LINE(10)
+					return _g;
+				}
+				return null();
+			}
+		};
+		HX_STACK_LINE(10)
+		::haxe::ds::StringMap fields = _Function_1_1::Block();		HX_STACK_VAR(fields,"fields");
+		HX_STACK_LINE(11)
+		::String data = a->post(HX_CSTRING("http://shaddy.org.ua/test.php"),fields);		HX_STACK_VAR(data,"data");
+		HX_STACK_LINE(15)
+		::haxe::Log_obj::trace((HX_CSTRING("Request complete:") + data),hx::SourceInfo(HX_CSTRING("Tests.hx"),15,HX_CSTRING("ua.org.shaddy.Tests"),HX_CSTRING("main")));
+		HX_STACK_LINE(16)
+		::haxe::Log_obj::trace((HX_CSTRING("error:") + a->lastResult->__Field(HX_CSTRING("errorText"),true)),hx::SourceInfo(HX_CSTRING("Tests.hx"),16,HX_CSTRING("ua.org.shaddy.Tests"),HX_CSTRING("main")));
 	}
 return null();
 }

@@ -7,6 +7,7 @@
 #include <ua/org/shaddy/tools/url/CurlInfo.h>
 #include <ua/org/shaddy/Tests.h>
 #include <haxe/io/Eof.h>
+#include <haxe/ds/StringMap.h>
 #include <haxe/ds/IntMap.h>
 #include <haxe/Log.h>
 #include <haxe/Int64.h>
@@ -24,6 +25,7 @@ hx::RegisterResources( hx::GetResources() );
 ::ua::org::shaddy::tools::url::CurlInfo_obj::__register();
 ::ua::org::shaddy::Tests_obj::__register();
 ::haxe::io::Eof_obj::__register();
+::haxe::ds::StringMap_obj::__register();
 ::haxe::ds::IntMap_obj::__register();
 ::haxe::Log_obj::__register();
 ::haxe::Int64_obj::__register();
@@ -38,6 +40,7 @@ hx::RegisterResources( hx::GetResources() );
 ::StringBuf_obj::__boot();
 ::haxe::Int64_obj::__boot();
 ::haxe::ds::IntMap_obj::__boot();
+::haxe::ds::StringMap_obj::__boot();
 ::haxe::io::Eof_obj::__boot();
 ::ua::org::shaddy::Tests_obj::__boot();
 ::ua::org::shaddy::tools::url::CurlInfo_obj::__boot();

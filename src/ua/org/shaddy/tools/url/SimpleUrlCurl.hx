@@ -1,5 +1,6 @@
 package ua.org.shaddy.tools.url;
 import haxe.ds.IntMap;
+import haxe.ds.StringMap;
 
 
 #if php
@@ -20,11 +21,13 @@ import haxe.ds.IntMap;
 #if (php || cpp)
 
 
+typedef CurlResult = { data:String, errorText:String, errorCode:Int };
+
 class SimpleUrlCurl {
 	private var handle:Dynamic;
 	private var options:IntMap<Dynamic>;
 	public var header:String;
-	
+	public var lastResult:CurlResult;
 	public function new(){
 		 options = new IntMap<Dynamic>();
 		 #if php 
@@ -35,25 +38,32 @@ class SimpleUrlCurl {
 		 
 	}
 	
-	private function preRequest(){
+	private function preRequest(url:String){
 		handle = CurlInterface.init();
 		trace ("Handle is:" + handle);
+		CurlInterface.setOpt(handle, CurlOptions.URL, url);
 		CurlInterface.setOptArray(handle, options);
 	}
 	
 	private function makeRequest():String{
-		var data:String = CurlInterface.exec(handle);
+		lastResult = CurlInterface.exec(handle);
 		var headerSize:Int = CurlInterface.getInfo(handle, CurlInfo.HEADER_SIZE);
-		header = data.substring(0, headerSize -1);
-		data = data.substring(headerSize);
+		var header = lastResult.data.substring(0, headerSize -1);
+		var data = lastResult.data.substring(headerSize);
 		//trace("Header size is:" + headerSize);
 		CurlInterface.close(handle);
 		return data;
 	}
 	
 	public function get(url:String):String{
-		preRequest();
-		CurlInterface.setOpt(handle, CurlOptions.URL, url);
+		preRequest(url);
+		return makeRequest();
+	}
+	
+	public function post(url:String, postData: StringMap<String> ):String{
+		preRequest(url);
+		CurlInterface.setOpt(handle, CurlOptions.POST, true);
+		CurlInterface.setPostFields(handle, postData);
 		return makeRequest();
 	}
 }

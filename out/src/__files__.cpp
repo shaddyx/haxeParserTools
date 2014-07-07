@@ -8,6 +8,7 @@ const char *__hxcpp_all_files[] = {
 	"haxe/Int64.hx",
 	"haxe/Log.hx",
 	"haxe/ds/IntMap.hx",
+	"haxe/ds/StringMap.hx",
 	"haxe/io/Eof.hx",
 	"ua/org/shaddy/Tests.hx",
 	"ua/org/shaddy/tools/url/CurlInfoCpp.hx",

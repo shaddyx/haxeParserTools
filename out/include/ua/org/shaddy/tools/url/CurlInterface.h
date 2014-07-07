@@ -8,6 +8,7 @@
 HX_DECLARE_CLASS0(IMap)
 HX_DECLARE_CLASS1(haxe,Int64)
 HX_DECLARE_CLASS2(haxe,ds,IntMap)
+HX_DECLARE_CLASS2(haxe,ds,StringMap)
 HX_DECLARE_CLASS5(ua,org,shaddy,tools,url,CurlInterface)
 
 	#include <curl/curl.h>
@@ -55,11 +56,14 @@ class HXCPP_CLASS_ATTRIBUTES  CurlInterface_obj : public hx::Object{
 		static Dynamic getInfo( ::haxe::Int64 ch,int option);
 		static Dynamic getInfo_dyn();
 
-		static ::String exec( ::haxe::Int64 ch);
+		static Dynamic exec( ::haxe::Int64 ch);
 		static Dynamic exec_dyn();
 
 		static bool close( ::haxe::Int64 ch);
 		static Dynamic close_dyn();
+
+		static Void setPostFields( Dynamic ch,::haxe::ds::StringMap arr);
+		static Dynamic setPostFields_dyn();
 
 };
 
