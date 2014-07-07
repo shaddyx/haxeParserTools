@@ -8,8 +8,13 @@ enum SimpleUrlProxyType {
 class SimpleUrlProxy {
 	public static var toExport = ['type', 'address','user','password','port','alive','failed', 'lastFailed'];
 	public var type:SimpleUrlProxyType;
-	public var ip:String;
+	public var address:String;
 	public var port:String;
+	public var user:String;
+	public var password:String;
+	public var alive:Bool = true;
+	public var lastSuccess:Int = 0;
+	
 	public function new(proxyString:String){
 		proxyString = StringTools.replace(StringTools.trim(proxyString),'@',':');
 	    if (proxyString.indexOf("://") != -1){
@@ -25,43 +30,32 @@ class SimpleUrlProxy {
 	    			case 'http':
 	    				type = SimpleUrlProxyType.HTTP;
     				default: 
-    					throw "Cant parse proxy:" + proxyString; 
+    					throw "Strange proxy format:" + proxyString; 
 	    		}
+	    		proxyString = StringTools.replace(proxyString, (type + '').toLowerCase() + '://', '' );
 	    	}
+	    	var chunks = proxyString.split(':');
+	    	switch (chunks.length) {
+	    		case 2:
+	    			address = chunks[0];
+	    			port = chunks[1];
+	    		case 4:
+	    			user = chunks[0];
+	    			password = chunks[1];
+	    			address = chunks[2];
+	    			port = chunks[3];
+	    		case 6:
+	    			user = chunks[0];
+	    			password = chunks[1];
+	    			address = chunks[2];
+	    			port = chunks[3];
+	    			alive = chunks[4] == "true";
+	    			lastSuccess = Std.parseInt(chunks[5]);
+	    		default:
+	    			throw "Proxy chunks count is wrong [" + chunks.length + "] in " + proxyString;
+	    	} 
 	    	
 	    }
-	        
-	        /*if (strstr($str,"://")){
-	            if (preg_match('~(.*?)\:\/\/~', $str, $out)){
-	                $type = strtolower($out[1]);
-	                $this->type = self::$proxyTypeMap[$type];
-	            } else {
-	                throw new Exception('Strange proxy format'. $str);
-	            }
-	            $str = str_replace($type.'://', '', $str);
-	        }
-	        $chunks = explode(":",$str);
-	        switch (count($chunks)) {
-	            case 2:
-	                $this->address = $chunks[0];
-	                $this->port = $chunks[1];
-	                break;
-	            case 4:
-	                $this->user = $chunks[0];
-	                $this->password = $chunks[1];
-	                $this->address = $chunks[2];
-	                $this->port = $chunks[3];
-	                break;
-	            case 6:
-	                $this->user = $chunks[0];
-	                $this->password = $chunks[1];
-	                $this->address = $chunks[2];
-	                $this->port = $chunks[3];
-	                $this->alive = $chunks[4];
-	                $this->lastSuccess = $chunks[5];
-	                break;
-	            default:
-	                throw new Exception('Proxy chunks count is wrong ['.count($chunks).'] in:'. $str);*/
 	}
 	
 	public function toString(){
