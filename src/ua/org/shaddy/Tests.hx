@@ -1,6 +1,7 @@
 package ua.org.shaddy;
 import ua.org.shaddy.tools.url.SimpleUrl;
-import ua.org.shaddy.tools.url.SimpleUrlProxy;
+import ua.org.shaddy.tools.url.proxy.Proxy;
+import ua.org.shaddy.tools.url.proxy.ProxyManager;
 import haxe.ds.IntMap;
 import haxe.ds.StringMap;
 import sys.io.File;
@@ -19,10 +20,13 @@ class Tests {
 		//trace("Request complete:" + data);
 		//trace("error:" + a.lastResult.errorText);
 		//File.saveContent("1.jpg",data);
-		var a = new SimpleUrlProxy("socks5://176.36.41.6:23");
-		trace (a);
+		//var a = new Proxy("socks5://176.36.41.6:23");
+		//var a = new SimpleUrlProxy();
+		//trace (a);
+		var a:ProxyManager = new ProxyManager();
+		var p = a.addProxy("192.168.2.2:2234");
 		
+		trace(p);
 		
-
 	}
 }
