@@ -42,8 +42,7 @@ class SimpleUrlCurl {
 	
 	private function preRequest(url:String){
 		handle = CurlInterface.init();
-		trace ("Handle is:" + handle);
-		CurlInterface.setOpt(handle, CurlOptions.URL, url);
+			CurlInterface.setOpt(handle, CurlOptions.URL, url);
 		if (proxy != null) {
 			CurlInterface.setOpt(handle, CurlOptions.PROXY, proxy.address);
 			CurlInterface.setOpt(handle, CurlOptions.PROXYPORT, proxy.port);

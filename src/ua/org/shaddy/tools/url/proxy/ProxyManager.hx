@@ -29,11 +29,11 @@ class ProxyManager {
 		} else {
 			throw "Error, proxy must be of type String of Proxy";
 		}
-		
 		var proxyKey = proxy.getKey();
 		if (badMap.exists(proxyKey)){
 			return badMap.get(proxyKey);
 		}
+		
 		if (map.exists(proxyKey)){
 			return map.get(proxyKey);
 		}
@@ -41,9 +41,10 @@ class ProxyManager {
 			badMap.set(proxy.getKey(), proxy);
 		} else {
 			map.set(proxyKey, proxy);
-			var pos:Int = cast(Math.random() * list.length, Int);
+			var pos:Int = Std.int(Math.random() * list.length);
 			list.insert(pos, proxyKey);
 		}
+		
 		proxy.proxyManager = this;
 		return proxy;
 	}
@@ -62,19 +63,14 @@ class ProxyManager {
 	public function load(fileName:String):Int {
 		var fin:FileInput = File.read(fileName, false);
 		var counter = 0;
-		try {
-			
-	        while (!fin.eof()){
-	        	var line = fin.readLine();
-	        	var outProxy = addProxy(line);
-	        	if (!outProxy.isBad()) {
-	        		counter ++;
-	        	}
-	        }
-	        fin.close();
-    	} catch (e:haxe.io.Eof) { 
-    		 
-    	}
+	    while (!fin.eof()){
+        	var line = fin.readLine();
+        	var outProxy = addProxy(line);
+        	if (!outProxy.isBad()) {
+        		counter ++;
+        	}
+        }
+        fin.close();
     	return counter;
 	}
 	

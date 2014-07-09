@@ -56,7 +56,7 @@ class Proxy {
     			lastSuccess = Std.parseInt(chunks[5]);
     		default:
     			throw "Proxy chunks count is wrong [" + chunks.length + "] in " + proxyString;
-    	} 
+    	}
 	}
 	
 	public function isBad():Bool{
@@ -73,7 +73,7 @@ class Proxy {
 		return address + ':' + port;
 	}
 	
-	@:noStack public function toString():String{
+	public function toString():String{
 		var str = new StringBuf();
 		str.add(type);
 		str.add('://');

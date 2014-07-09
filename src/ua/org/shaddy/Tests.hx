@@ -32,8 +32,11 @@ class Tests {
 		proxy.fail();
 		trace(proxy);
 		url.proxy = proxy;
-		var res = url.get("http://yandex.ru");
+		var res = url.get("http://ya.ru");
+		trace(url.lastResult.errorText);
+		
 		trace(res);
+				
 		a.save("proxies/proxyList1.txt");
 		
 		
