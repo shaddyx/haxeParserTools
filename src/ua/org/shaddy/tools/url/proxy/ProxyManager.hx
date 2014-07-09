@@ -9,6 +9,7 @@ class ProxyManager {
 	private var map:StringMap<Proxy>;
 	private var badMap:StringMap<Proxy>;
 	private var list:Array<String>;
+	private var index:Int = 0;
 	//private var Array
 	public function new (){
 		map = new StringMap<Proxy>();
@@ -54,7 +55,7 @@ class ProxyManager {
 			outList.insert(pos, proxyKey);
 		}
 		this.list = outList;
-	
+		index = 0;
 	}
 	
 	public function load(fileName:String) {
@@ -70,12 +71,14 @@ class ProxyManager {
     	}
 	}
 	
+	public function get():Proxy{
+		
+	}
+	
 	public function toString():String{
 		var str = new StringBuf();
 		str.add("ProxyManager:" + list);
 		return str.toString();
-		
-		
 	}
 	
 }
