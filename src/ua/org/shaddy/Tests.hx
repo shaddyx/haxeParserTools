@@ -24,9 +24,10 @@ class Tests {
 		//var a = new SimpleUrlProxy();
 		//trace (a);
 		var a:ProxyManager = new ProxyManager();
-		var p = a.addProxy("192.168.2.2:2234");
-		
-		trace(p);
-		
+		//var p = a.addProxy("192.168.2.2:2234");
+		a.load("proxies/proxyList.txt");
+		trace(a);
+		a.reset();
+		trace(a);
 	}
 }

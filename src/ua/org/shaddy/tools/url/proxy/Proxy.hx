@@ -70,17 +70,23 @@ class Proxy {
 		var str = new StringBuf();
 		str.add(type);
 		str.add('://');
-		str.add(user);
-		str.add(':');
-		str.add(password);
-		str.add(':');
+		
+		if (user.length > 0 || password.length > 0){
+			str.add(user);
+			str.add(':');
+			str.add(password);
+			str.add(':');
+		}
+		
 		str.add(address);
 		str.add(':');
 		str.add(port);
-		str.add(':');
-		str.add(failed);
-		str.add(':');
-		str.add(lastSuccess);
+		if (failed != 0 || lastSuccess !=0) {
+			str.add(':');
+			str.add(failed);
+			str.add(':');
+			str.add(lastSuccess);
+		}
 		//str.add();
 		return str.toString();
 	}
