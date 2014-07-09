@@ -1,6 +1,7 @@
 package ua.org.shaddy.tools.url;
 import haxe.ds.IntMap;
 import haxe.ds.StringMap;
+import ua.org.shaddy.tools.url.proxy.Proxy;
 
 
 #if php
@@ -28,6 +29,7 @@ class SimpleUrlCurl {
 	private var options:IntMap<Dynamic>;
 	public var header:String;
 	public var lastResult:CurlResult;
+	public var proxy:Proxy;
 	public function new(){
 		 options = new IntMap<Dynamic>();
 		 #if php 
@@ -42,6 +44,21 @@ class SimpleUrlCurl {
 		handle = CurlInterface.init();
 		trace ("Handle is:" + handle);
 		CurlInterface.setOpt(handle, CurlOptions.URL, url);
+		if (proxy != null) {
+			CurlInterface.setOpt(handle, CurlOptions.PROXY, proxy.address);
+			CurlInterface.setOpt(handle, CurlOptions.PROXYPORT, proxy.port);
+			var type = 0;
+			switch(proxy.type){
+				case ProxyType.http:
+					type = 0;
+				case ProxyType.socks4:
+					type = 4;
+				case ProxyType.socks5:
+					type = 5;
+			}
+			CurlInterface.setOpt(handle, CurlOptions.PROXYTYPE, type);
+			CurlInterface.setOpt(handle, CurlOptions.USERPWD, proxy.user + ":" + proxy.password);
+		}
 		CurlInterface.setOptArray(handle, options);
 	}
 	

@@ -3,6 +3,7 @@ import ua.org.shaddy.tools.url.proxy.Proxy;
 import haxe.ds.StringMap;
 import sys.io.File;
 import sys.io.FileInput;
+import sys.io.FileOutput;
 
 class ProxyManager {
 	
@@ -43,7 +44,7 @@ class ProxyManager {
 			var pos:Int = cast(Math.random() * list.length, Int);
 			list.insert(pos, proxyKey);
 		}
-		
+		proxy.proxyManager = this;
 		return proxy;
 	}
 	
@@ -58,21 +59,59 @@ class ProxyManager {
 		index = 0;
 	}
 	
-	public function load(fileName:String) {
+	public function load(fileName:String):Int {
 		var fin:FileInput = File.read(fileName, false);
+		var counter = 0;
 		try {
+			
 	        while (!fin.eof()){
 	        	var line = fin.readLine();
 	        	var outProxy = addProxy(line);
+	        	if (!outProxy.isBad()) {
+	        		counter ++;
+	        	}
 	        }
 	        fin.close();
     	} catch (e:haxe.io.Eof) { 
-    		return; 
+    		 
     	}
+    	return counter;
 	}
 	
-	public function get():Proxy{
+	public function save(fileName:String){
+		var fout:FileOutput = File.write(fileName, false);
+		for (proxy in map){
+			fout.writeString(proxy.toString() + "\n");
+		}
 		
+		for (proxy in badMap){
+			fout.writeString(proxy.toString() + "\n");
+		}
+		fout.close();
+	}
+	
+	public function refreshProxy(proxy:Proxy){
+		var key = proxy.getKey();
+		if (badMap.exists(key) && !proxy.isBad()){
+			badMap.remove(key);
+			list.remove(key);
+			addProxy(proxy);
+		} else if (map.exists(key) && proxy.isBad()){
+			map.remove(key);
+			list.remove(key);
+			addProxy(proxy);
+		}
+	}
+	 
+	public function get():Proxy{
+		if (index >= list.length) {
+			index = 0;
+		}
+		if (index == 0 && list.length == 0) {
+			return null;
+		}
+		var key = list[index];
+		return map.get(key);
 	}
 	
 	public function toString():String{

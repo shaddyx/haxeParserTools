@@ -13,6 +13,7 @@ class Proxy {
 	public var password:String = "";
 	public var failed:Int = 0;
 	public var lastSuccess:Int = 0;
+	public var proxyManager:ProxyManager;
 	
 	
 	public function new(?proxyString:String){
@@ -61,6 +62,12 @@ class Proxy {
 	public function isBad():Bool{
 		return failed >= 3;
 	}
+	
+	public function fail(){
+		failed++;
+		proxyManager.refreshProxy(this);
+	}
+	
 	
 	public function getKey(){
 		return address + ':' + port;

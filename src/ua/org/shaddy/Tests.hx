@@ -23,11 +23,19 @@ class Tests {
 		//var a = new Proxy("socks5://176.36.41.6:23");
 		//var a = new SimpleUrlProxy();
 		//trace (a);
+		var url = new SimpleUrl();
 		var a:ProxyManager = new ProxyManager();
 		//var p = a.addProxy("192.168.2.2:2234");
 		a.load("proxies/proxyList.txt");
-		trace(a);
-		a.reset();
-		trace(a);
+		var proxy = a.get();
+		trace(proxy);
+		proxy.fail();
+		trace(proxy);
+		url.proxy = proxy;
+		var res = url.get("http://yandex.ru");
+		trace(res);
+		a.save("proxies/proxyList1.txt");
+		
+		
 	}
 }

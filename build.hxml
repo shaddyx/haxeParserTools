@@ -14,10 +14,10 @@
 # -neko out/SimpleUrl.n
 
 # PHP target
- -php out
+#-php out
 
 # C++ target
-#-cpp out
+-cpp out
 
 # Uncomment and place your main class with package
 -main ua.org.shaddy.Tests
