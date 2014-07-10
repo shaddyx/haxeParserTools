@@ -1,5 +1,6 @@
 package ua.org.shaddy.tools.url.proxy;
 import ua.org.shaddy.tools.url.proxy.Proxy;
+import ua.org.shaddy.tools.log.Logger;
 import haxe.ds.StringMap;
 import sys.io.File;
 import sys.io.FileInput;
@@ -7,10 +8,12 @@ import sys.io.FileOutput;
 
 class ProxyManager {
 	
+	private static var logger:Logger = new Logger(ProxyManager);
 	private var map:StringMap<Proxy>;
 	private var badMap:StringMap<Proxy>;
 	private var list:Array<String>;
 	private var index:Int = 0;
+	
 	//private var Array
 	public function new (){
 		map = new StringMap<Proxy>();
@@ -20,9 +23,11 @@ class ProxyManager {
 	
 	
 	public function addProxy(proxyS:Dynamic):Proxy{
+		logger.debug("adding proxy:", proxyS);
 		var proxy:Proxy = null;
 		
 		if (Std.is(proxyS, String)){
+			logger.debug("proxy is String", proxyS);
 			proxy = new Proxy(proxyS);
 		} else if (Std.is(proxy, Proxy)){
 			proxy = proxyS;
