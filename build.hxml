@@ -14,7 +14,7 @@
 # -neko out/SimpleUrl.n
 
 # PHP target
-#-php out 
+# -php out 
 
 # C++ target
 -cpp out

@@ -61,6 +61,7 @@ class CurlInterface{
 	}
 	
 	public static function setOpt(ch:Int64, option:Int, value:Dynamic):Bool{
+	trace("setting[" + option + "]:" + value);
 		var hi:Int = Int64.getHigh(ch);
 		var lo:Int = Int64.getLow(ch);
 		untyped __cpp__("long handler = ((long) hi << 32) | lo");

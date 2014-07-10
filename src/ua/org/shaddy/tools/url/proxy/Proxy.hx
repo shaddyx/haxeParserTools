@@ -8,7 +8,7 @@ enum ProxyType {
 class Proxy {
 	public var type:ProxyType;
 	public var address:String = "";
-	public var port:String = "";
+	public var port:Int = 0;
 	public var user:String = "";
 	public var password:String = "";
 	public var failed:Int = 0;
@@ -41,17 +41,17 @@ class Proxy {
     	switch (chunks.length) {
     		case 2:
     			address = chunks[0];
-    			port = chunks[1];
+    			port = Std.parseInt(chunks[1]);
     		case 4:
     			user = chunks[0];
     			password = chunks[1];
     			address = chunks[2];
-    			port = chunks[3];
+    			port = Std.parseInt(chunks[3]);
     		case 6:
     			user = chunks[0];
     			password = chunks[1];
     			address = chunks[2];
-    			port = chunks[3];
+    			port = Std.parseInt(chunks[3]);
     			failed = Std.parseInt(chunks[4]);
     			lastSuccess = Std.parseInt(chunks[5]);
     		default:

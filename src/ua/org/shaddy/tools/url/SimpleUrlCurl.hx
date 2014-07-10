@@ -44,6 +44,7 @@ class SimpleUrlCurl {
 		handle = CurlInterface.init();
 			CurlInterface.setOpt(handle, CurlOptions.URL, url);
 		if (proxy != null) {
+			trace ("Setting proxy");
 			CurlInterface.setOpt(handle, CurlOptions.PROXY, proxy.address);
 			CurlInterface.setOpt(handle, CurlOptions.PROXYPORT, proxy.port);
 			var type = 0;
@@ -57,6 +58,8 @@ class SimpleUrlCurl {
 			}
 			CurlInterface.setOpt(handle, CurlOptions.PROXYTYPE, type);
 			CurlInterface.setOpt(handle, CurlOptions.USERPWD, proxy.user + ":" + proxy.password);
+		} else {
+			trace ("Proxy is false");
 		}
 		CurlInterface.setOptArray(handle, options);
 	}

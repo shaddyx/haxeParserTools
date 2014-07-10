@@ -11,6 +11,7 @@ class CurlInterface{
 	}
 	
 	public static function setOpt(ch:Dynamic, option:Int, value:Dynamic):Bool{
+		trace("setting[" + option + "]:" + value);
 		return untyped __call__("curl_setopt", ch, option, value); 
 	}
 	
