@@ -43,8 +43,8 @@ class Logger {
 			var msg = mkMessage(lvl, a, b, c, d);
 			#if php
 				php.Lib.println(msg);
-			#elif cpp
-				cpp.Lib.println(msg)
+			#elseif cpp
+				cpp.Lib.println(msg);
 			#else
 				trace(msg);
 			#end
@@ -62,6 +62,7 @@ class Logger {
 				}
 			}
 		}
+		
 		var msg = new StringBuf();
 		msg.add(backMap.get(lvl));
 		msg.add(':');

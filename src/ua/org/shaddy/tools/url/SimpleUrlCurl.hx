@@ -2,7 +2,8 @@ package ua.org.shaddy.tools.url;
 import haxe.ds.IntMap;
 import haxe.ds.StringMap;
 import ua.org.shaddy.tools.url.proxy.Proxy;
-
+import ua.org.shaddy.tools.url.cache.Cache;
+import ua.org.shaddy.tools.url.cache.CacheItem;
 
 #if php
 	import ua.org.shaddy.tools.url.CurlOptionsPhp;
@@ -30,6 +31,7 @@ class SimpleUrlCurl {
 	public var header:String;
 	public var lastResult:CurlResult;
 	public var proxy:Proxy;
+	public var cache:Cache = null;
 	public function new(){
 		 options = new IntMap<Dynamic>();
 		 #if php 
@@ -69,7 +71,6 @@ class SimpleUrlCurl {
 		var headerSize:Int = CurlInterface.getInfo(handle, CurlInfo.HEADER_SIZE);
 		var header = lastResult.data.substring(0, headerSize -1);
 		var data = lastResult.data.substring(headerSize);
-		//trace("Header size is:" + headerSize);
 		CurlInterface.close(handle);
 		return data;
 	}

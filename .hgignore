@@ -6,4 +6,5 @@ syntax: glob
 #*.php
 *~
 out/*
-
+.idea/
+*.iml

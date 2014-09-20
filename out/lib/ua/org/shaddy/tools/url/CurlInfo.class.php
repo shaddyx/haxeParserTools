@@ -1,0 +1,96 @@
+<?php
+
+class ua_org_shaddy_tools_url_CurlInfo {
+	public function __construct(){}
+	static $CONNECT_TIME;
+	static $CONTENT_LENGTH_DOWNLOAD;
+	static $CONTENT_LENGTH_UPLOAD;
+	static $CONTENT_TYPE;
+	static $EFFECTIVE_URL;
+	static $FILETIME;
+	static $HEADER_OUT;
+	static $HEADER_SIZE;
+	static $HTTP_CODE;
+	static $LASTONE;
+	static $NAMELOOKUP_TIME;
+	static $PRETRANSFER_TIME;
+	static $hPRIVATE;
+	static $REDIRECT_COUNT;
+	static $REDIRECT_TIME;
+	static $REQUEST_SIZE;
+	static $SIZE_DOWNLOAD;
+	static $SIZE_UPLOAD;
+	static $SPEED_DOWNLOAD;
+	static $SPEED_UPLOAD;
+	static $SSL_VERIFYRESULT;
+	static $STARTTRANSFER_TIME;
+	static $TOTAL_TIME;
+	static $HTTP_CONNECTCODE;
+	static $HTTPAUTH_AVAIL;
+	static $RESPONSE_CODE;
+	static $PROXYAUTH_AVAIL;
+	static $OS_ERRNO;
+	static $NUM_CONNECTS;
+	static $SSL_ENGINES;
+	static $COOKIELIST;
+	static $FTP_ENTRY_PATH;
+	static $REDIRECT_URL;
+	static $APPCONNECT_TIME;
+	static $PRIMARY_IP;
+	static $CERTINFO;
+	static $CONDITION_UNMET;
+	static $RTSP_CLIENT_CSEQ;
+	static $RTSP_CSEQ_RECV;
+	static $RTSP_SERVER_CSEQ;
+	static $RTSP_SESSION_ID;
+	static $LOCAL_IP;
+	static $LOCAL_PORT;
+	static $PRIMARY_PORT;
+	function __toString() { return 'ua.org.shaddy.tools.url.CurlInfo'; }
+}
+{
+	ua_org_shaddy_tools_url_CurlInfo::$CONNECT_TIME = CURLINFO_CONNECT_TIME;
+	ua_org_shaddy_tools_url_CurlInfo::$CONTENT_LENGTH_DOWNLOAD = CURLINFO_CONTENT_LENGTH_DOWNLOAD;
+	ua_org_shaddy_tools_url_CurlInfo::$CONTENT_LENGTH_UPLOAD = CURLINFO_CONTENT_LENGTH_UPLOAD;
+	ua_org_shaddy_tools_url_CurlInfo::$CONTENT_TYPE = CURLINFO_CONTENT_TYPE;
+	ua_org_shaddy_tools_url_CurlInfo::$EFFECTIVE_URL = CURLINFO_EFFECTIVE_URL;
+	ua_org_shaddy_tools_url_CurlInfo::$FILETIME = CURLINFO_FILETIME;
+	ua_org_shaddy_tools_url_CurlInfo::$HEADER_OUT = CURLINFO_HEADER_OUT;
+	ua_org_shaddy_tools_url_CurlInfo::$HEADER_SIZE = CURLINFO_HEADER_SIZE;
+	ua_org_shaddy_tools_url_CurlInfo::$HTTP_CODE = CURLINFO_HTTP_CODE;
+	ua_org_shaddy_tools_url_CurlInfo::$LASTONE = CURLINFO_LASTONE;
+	ua_org_shaddy_tools_url_CurlInfo::$NAMELOOKUP_TIME = CURLINFO_NAMELOOKUP_TIME;
+	ua_org_shaddy_tools_url_CurlInfo::$PRETRANSFER_TIME = CURLINFO_PRETRANSFER_TIME;
+	ua_org_shaddy_tools_url_CurlInfo::$hPRIVATE = CURLINFO_PRIVATE;
+	ua_org_shaddy_tools_url_CurlInfo::$REDIRECT_COUNT = CURLINFO_REDIRECT_COUNT;
+	ua_org_shaddy_tools_url_CurlInfo::$REDIRECT_TIME = CURLINFO_REDIRECT_TIME;
+	ua_org_shaddy_tools_url_CurlInfo::$REQUEST_SIZE = CURLINFO_REQUEST_SIZE;
+	ua_org_shaddy_tools_url_CurlInfo::$SIZE_DOWNLOAD = CURLINFO_SIZE_DOWNLOAD;
+	ua_org_shaddy_tools_url_CurlInfo::$SIZE_UPLOAD = CURLINFO_SIZE_UPLOAD;
+	ua_org_shaddy_tools_url_CurlInfo::$SPEED_DOWNLOAD = CURLINFO_SPEED_DOWNLOAD;
+	ua_org_shaddy_tools_url_CurlInfo::$SPEED_UPLOAD = CURLINFO_SPEED_UPLOAD;
+	ua_org_shaddy_tools_url_CurlInfo::$SSL_VERIFYRESULT = CURLINFO_SSL_VERIFYRESULT;
+	ua_org_shaddy_tools_url_CurlInfo::$STARTTRANSFER_TIME = CURLINFO_STARTTRANSFER_TIME;
+	ua_org_shaddy_tools_url_CurlInfo::$TOTAL_TIME = CURLINFO_TOTAL_TIME;
+	ua_org_shaddy_tools_url_CurlInfo::$HTTP_CONNECTCODE = CURLINFO_HTTP_CONNECTCODE;
+	ua_org_shaddy_tools_url_CurlInfo::$HTTPAUTH_AVAIL = CURLINFO_HTTPAUTH_AVAIL;
+	ua_org_shaddy_tools_url_CurlInfo::$RESPONSE_CODE = CURLINFO_RESPONSE_CODE;
+	ua_org_shaddy_tools_url_CurlInfo::$PROXYAUTH_AVAIL = CURLINFO_PROXYAUTH_AVAIL;
+	ua_org_shaddy_tools_url_CurlInfo::$OS_ERRNO = CURLINFO_OS_ERRNO;
+	ua_org_shaddy_tools_url_CurlInfo::$NUM_CONNECTS = CURLINFO_NUM_CONNECTS;
+	ua_org_shaddy_tools_url_CurlInfo::$SSL_ENGINES = CURLINFO_SSL_ENGINES;
+	ua_org_shaddy_tools_url_CurlInfo::$COOKIELIST = CURLINFO_COOKIELIST;
+	ua_org_shaddy_tools_url_CurlInfo::$FTP_ENTRY_PATH = CURLINFO_FTP_ENTRY_PATH;
+	ua_org_shaddy_tools_url_CurlInfo::$REDIRECT_URL = CURLINFO_REDIRECT_URL;
+	ua_org_shaddy_tools_url_CurlInfo::$APPCONNECT_TIME = CURLINFO_APPCONNECT_TIME;
+	ua_org_shaddy_tools_url_CurlInfo::$PRIMARY_IP = CURLINFO_PRIMARY_IP;
+	ua_org_shaddy_tools_url_CurlInfo::$CERTINFO = CURLINFO_CERTINFO;
+	ua_org_shaddy_tools_url_CurlInfo::$CONDITION_UNMET = CURLINFO_CONDITION_UNMET;
+	ua_org_shaddy_tools_url_CurlInfo::$RTSP_CLIENT_CSEQ = CURLINFO_RTSP_CLIENT_CSEQ;
+	ua_org_shaddy_tools_url_CurlInfo::$RTSP_CSEQ_RECV = CURLINFO_RTSP_CSEQ_RECV;
+	ua_org_shaddy_tools_url_CurlInfo::$RTSP_SERVER_CSEQ = CURLINFO_RTSP_SERVER_CSEQ;
+	ua_org_shaddy_tools_url_CurlInfo::$RTSP_SESSION_ID = CURLINFO_RTSP_SESSION_ID;
+	ua_org_shaddy_tools_url_CurlInfo::$LOCAL_IP = CURLINFO_LOCAL_IP;
+	ua_org_shaddy_tools_url_CurlInfo::$LOCAL_PORT = CURLINFO_LOCAL_PORT;
+	ua_org_shaddy_tools_url_CurlInfo::$PRIMARY_PORT = CURLINFO_PRIMARY_PORT;
+}
